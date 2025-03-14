@@ -36,15 +36,14 @@
           </div>
 
           <p
-            class="text-xl md:text-2xl mb-8 text-black leading-relaxed fade-in-delayed"
+            class="text-xl text-balance md:text-2xl mb-8 text-black leading-loose fade-in-delayed"
           >
             Stream and process
-            <span class="accent-text">JSON responses</span> from
-            <span class="accent-text">AI tool calls</span> as they arrive—<br
-              class="hidden md:block"
-            />
-            intelligently tracking state to produce JSON
-            <span class="accent-text">before it's complete</span>
+            <span class="accent-text inline-block">JSON responses</span> from
+            <span class="accent-text inline-block">AI tool calls</span> as they
+            arrive—<br class="hidden md:block" />
+            intelligently tracking state to produce valid JSON
+            <span class="accent-text inline-block">before it's complete</span>
           </p>
 
           <div
@@ -285,8 +284,8 @@ for await (const data of jsonReader(reader)) {
               Lightweight & Fast
             </h3>
             <p class="text-black">
-              Super lightweight (1.6Kb min-gzip) and minimal overhead, ensuring maximum
-              performance even with large streaming datasets.
+              Super lightweight (1.6Kb min-gzip) and minimal overhead, ensuring
+              maximum performance even with large streaming datasets.
             </p>
           </div>
         </div>
