@@ -348,8 +348,9 @@ for await (const data of jsonReader(reader)) {
                 </h4>
               </div>
               <p class="text-gray-600 mb-8 flex-grow">
-                Use jsonreader in your personal projects, open source
-                contributions, and learning experiences at no cost.
+                Use jsonreader in your personal projects, educational pursuits,
+                and non-commercial applications, but not as part of
+                redistributed open source that enables commercial use.
               </p>
               <div class="flex items-end justify-between mt-auto">
                 <span class="text-4xl font-bold text-black">$0</span>
