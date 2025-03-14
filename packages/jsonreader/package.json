@@ -1,6 +1,6 @@
 {
   "name": "jsonreader",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A utility for reading and parsing JSON streams in real-time",
   "type": "module",
   "main": "dist/index.js",
