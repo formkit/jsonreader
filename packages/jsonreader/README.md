@@ -1,5 +1,7 @@
 # jsonreader
 
+[![Tests](https://github.com/formkit/jsonreader/actions/workflows/tests.yml/badge.svg)](https://github.com/formkit/jsonreader/actions/workflows/tests.yml)
+
 A lightweight utility for reading and parsing JSON from streams in real-time, yielding progressively updated results as data arrives.
 
 ## Features

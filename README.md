@@ -1,5 +1,7 @@
 # jsonreader monorepo
 
+[![Tests](https://github.com/formkit/jsonreader/actions/workflows/tests.yml/badge.svg)](https://github.com/formkit/jsonreader/actions/workflows/tests.yml)
+
 This is a monorepo for the `jsonreader` package and its documentation site.
 
 ## About jsonreader

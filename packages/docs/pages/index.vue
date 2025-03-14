@@ -25,7 +25,7 @@
               class="hidden md:block"
             />
             intelligently tracking state to produce JSON
-            <span class="accent-text">before it's complete</span>
+            <span class="accent-text">before it's complete</span>.
           </p>
 
           <div

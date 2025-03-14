@@ -1,5 +1,7 @@
 # jsonreader Examples
 
+[![Tests](https://github.com/formkit/jsonreader/actions/workflows/tests.yml/badge.svg)](https://github.com/formkit/jsonreader/actions/workflows/tests.yml)
+
 This directory contains examples demonstrating how to use the `jsonreader` package for streaming JSON processing.
 
 ## Running the Examples
