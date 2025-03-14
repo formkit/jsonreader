@@ -9,7 +9,7 @@
     "dev:jsonreader": "pnpm --filter jsonreader dev",
     "test": "pnpm -r test",
     "lint": "pnpm -r lint",
-    "release": "bumpp -r && cd packages/jsonreader && pnpm publish"
+    "release": "pnpm build && bumpp -r && cd packages/jsonreader && pnpm publish"
   },
   "keywords": [
     "json",

@@ -37,7 +37,7 @@
     "progressive",
     "esm"
   ],
-  "author": "",
+  "author": "Justin Schroeder <justin@formkit.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
