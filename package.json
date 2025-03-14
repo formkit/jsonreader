@@ -1,0 +1,33 @@
+{
+  "name": "jsonreader-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A monorepo for the jsonreader package and its documentation",
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev:docs": "pnpm --filter docs dev",
+    "dev:jsonreader": "pnpm --filter jsonreader dev",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint"
+  },
+  "keywords": [
+    "json",
+    "reader",
+    "parser"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.16",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "shikiji": "^0.10.2",
+    "tailwindcss": "^3.4.11"
+  }
+}
