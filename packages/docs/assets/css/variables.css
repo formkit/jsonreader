@@ -1,0 +1,28 @@
+:root {
+  /* Primary accent color - define both the color and RGB values separately for opacity control */
+  --color-accent: #3b82f6; /* blue-500 */
+  --color-accent-rgb: 59, 130, 246;
+
+  /* Text colors */
+  --color-text-primary: #1f2937; /* gray-800 */
+  --color-text-secondary: #4b5563; /* gray-600 */
+
+  /* Background colors */
+  --color-bg-card: #ffffff;
+  --color-bg-card-secondary: #f9fafb; /* gray-50 */
+
+  /* Border colors */
+  --color-border: #e5e7eb; /* gray-200 */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text-primary: #f3f4f6; /* gray-100 */
+    --color-text-secondary: #d1d5db; /* gray-300 */
+
+    --color-bg-card: #1f2937; /* gray-800 */
+    --color-bg-card-secondary: #111827; /* gray-900 */
+
+    --color-border: #374151; /* gray-700 */
+  }
+}
