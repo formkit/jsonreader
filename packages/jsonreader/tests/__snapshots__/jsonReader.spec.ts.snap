@@ -1,0 +1,215 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`streaming json > can have required properties that are nested 1`] = `
+[
+  {
+    "foo": {
+      "bim": "here",
+    },
+  },
+  {
+    "foo": {
+      "baz": 1,
+      "bim": "here",
+    },
+  },
+  {
+    "foo": {
+      "baz": 12,
+      "bim": "here",
+    },
+  },
+  {
+    "foo": {
+      "baz": 123,
+      "bim": "here",
+    },
+  },
+  {
+    "foo": {
+      "baz": 123,
+      "bim": "here",
+    },
+    "hello": "",
+  },
+  {
+    "foo": {
+      "baz": 123,
+      "bim": "here",
+    },
+    "hello": "w",
+  },
+  {
+    "foo": {
+      "baz": 123,
+      "bim": "here",
+    },
+    "hello": "wo",
+  },
+  {
+    "foo": {
+      "baz": 123,
+      "bim": "here",
+    },
+    "hello": "wor",
+  },
+  {
+    "foo": {
+      "baz": 123,
+      "bim": "here",
+    },
+    "hello": "worl",
+  },
+  {
+    "foo": {
+      "baz": 123,
+      "bim": "here",
+    },
+    "hello": "world",
+  },
+]
+`;
+
+exports[`streaming json > can yield array property values 1`] = `
+[
+  {
+    "foo": [],
+  },
+  {
+    "foo": [
+      "",
+    ],
+  },
+  {
+    "foo": [
+      "o",
+    ],
+  },
+  {
+    "foo": [
+      "on",
+    ],
+  },
+  {
+    "foo": [
+      "one",
+    ],
+  },
+  {
+    "foo": [
+      "one",
+      "",
+    ],
+  },
+  {
+    "foo": [
+      "one",
+      "t",
+    ],
+  },
+  {
+    "foo": [
+      "one",
+      "tw",
+    ],
+  },
+  {
+    "foo": [
+      "one",
+      "two",
+    ],
+  },
+  {
+    "foo": [
+      "one",
+      "two",
+      1,
+    ],
+  },
+  {
+    "foo": [
+      "one",
+      "two",
+      12,
+    ],
+  },
+  {
+    "foo": [
+      "one",
+      "two",
+      123,
+    ],
+  },
+  {
+    "baz": [],
+    "foo": [
+      "one",
+      "two",
+      123,
+    ],
+  },
+  {
+    "baz": [
+      1,
+    ],
+    "foo": [
+      "one",
+      "two",
+      123,
+    ],
+  },
+  {
+    "baz": [
+      12,
+    ],
+    "foo": [
+      "one",
+      "two",
+      123,
+    ],
+  },
+  {
+    "baz": [
+      123,
+    ],
+    "foo": [
+      "one",
+      "two",
+      123,
+    ],
+  },
+]
+`;
+
+exports[`streaming json > does not return early when dealing with nested strings of json 1`] = `
+[
+  {
+    "response": {},
+  },
+  {
+    "response": {
+      "routes": [],
+    },
+  },
+  {
+    "response": {
+      "routes": [
+        {
+          "arguments_for_prompt": [
+            {
+              "key": "rewritten_prompt",
+              "value": "Translate this input to German",
+            },
+            {
+              "key": "rewritten_input",
+              "value": "{"type":"page_break","idx":"1","key":"fvumampbuem","content":"$: \\"User Login\\""}",
+            },
+          ],
+          "instructions_for_prompt": "Translate this input to German",
+          "prompt_name": "routeEditInput",
+        },
+      ],
+    },
+  },
+]
+`;
