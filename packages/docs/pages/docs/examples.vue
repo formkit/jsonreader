@@ -47,86 +47,69 @@
           Streaming Function Call Results
         </h3>
 
-        <div
-          class="code-block card-noise fade-in-delayed"
-          style="animation-delay: 0.3s"
-        >
-          <div class="code-window-header flex justify-between items-center">
-            <div class="code-window-dots flex gap-1">
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-            </div>
-            <div class="text-black text-xs font-bold">
-              AI Function Call Example
-            </div>
-          </div>
-          <div class="p-6 bg-black overflow-hidden">
-            <pre
-              class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
-            >
-<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+        <CodeBlock
+          language="javascript"
+          code="import { jsonReader } from 'jsonreader';
 
-<span class="text-accent">async</span> <span class="text-accent">function</span> <span class="text-white">processAIFunctionCall</span>() {
-  <span class="text-gray-400">// Call an AI model with function calling enabled</span>
-  <span class="text-accent">const</span> response = <span class="text-accent">await</span> fetch(<span class="text-white">'https://api.openai.com/v1/chat/completions'</span>, {
-    method: <span class="text-white">'POST'</span>,
+async function processAIFunctionCall() {
+  // Call an AI model with function calling enabled
+  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
     headers: {
-      <span class="text-white">'Content-Type'</span>: <span class="text-white">'application/json'</span>,
-      <span class="text-white">'Authorization'</span>: <span class="text-white">`Bearer ${API_KEY}`</span>
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${API_KEY}`
     },
     body: JSON.stringify({
-      model: <span class="text-white">"gpt-4-turbo"</span>,
+      model: 'gpt-4-turbo',
       messages: [
-        { role: <span class="text-white">"user"</span>, content: <span class="text-white">"Generate a list of 50 product ideas"</span> }
+        { role: 'user', content: 'Generate a list of 50 product ideas' }
       ],
       tools: [{
-        type: <span class="text-white">"function"</span>,
+        type: 'function',
         function: {
-          name: <span class="text-white">"generate_startup_ideas"</span>
+          name: 'generate_startup_ideas'
         }
       }],
-      stream: <span class="text-accent">true</span>
+      stream: true
     })
   });
 
-  <span class="text-accent">const</span> reader = response.body.getReader();
+  const reader = response.body.getReader();
   
-  <span class="text-gray-400">// Track ideas we've seen</span>
-  <span class="text-accent">const</span> processedIdeas = <span class="text-accent">new</span> Set();
-  <span class="text-accent">const</span> startTime = Date.now();
+  // Track ideas we've seen
+  const processedIdeas = new Set();
+  const startTime = Date.now();
   
-  <span class="text-accent">for</span> <span class="text-accent">await</span> (<span class="text-accent">const</span> partialData <span class="text-accent">of</span> jsonReader(reader)) {
-    <span class="text-accent">try</span> {
-      <span class="text-accent">if</span> (partialData.choices && 
-          partialData.choices[<span class="text-accent">0</span>]?.tool_calls) {
-        <span class="text-gray-400">// Process partial function call data</span>
-        <span class="text-accent">try</span> {
-          <span class="text-accent">const</span> args = JSON.parse(partialData.choices[<span class="text-accent">0</span>].tool_calls[<span class="text-accent">0</span>].function.arguments);
-          
-          <span class="text-accent">if</span> (args.ideas) {
-            <span class="text-accent">const</span> newIdeas = args.ideas.filter(idea => !processedIdeas.has(idea.name));
-            
-            <span class="text-gray-400">// Process only new ideas</span>
-            <span class="text-accent">for</span> (<span class="text-accent">const</span> idea <span class="text-accent">of</span> newIdeas) {
-              console.log(<span class="text-white">`New idea: ${idea.name}`</span>);
-              processedIdeas.add(idea.name);
-              updateUI(idea);
+  for await (const partialData of jsonReader(reader)) {
+    try {
+      // Look for tool calls in the response
+      const toolCall = partialData?.choices?.[0]?.delta?.tool_calls?.[0];
+      if (toolCall?.function?.arguments) {
+        // Parse the function arguments
+        const args = JSON.parse(toolCall.function.arguments);
+        
+        if (args.ideas && Array.isArray(args.ideas)) {
+          // Process each new idea as it arrives
+          for (const idea of args.ideas) {
+            if (!processedIdeas.has(idea.id)) {
+              processedIdeas.add(idea.id);
+              console.log(`Idea #${idea.id} received after ${Date.now() - startTime}ms`);
+              
+              // Update the UI with the new idea
+              addIdeaToInterface(idea);
             }
           }
-        } <span class="text-accent">catch</span> (parseError) {
-          <span class="text-gray-400">// This is expected for partial JSON</span>
         }
       }
-    } <span class="text-accent">catch</span> (error) {
-      console.error(<span class="text-white">'Error processing data:'</span>, error);
+    } catch (error) {
+      // Handle parsing errors but continue processing
+      console.error('Error processing partial data:', error);
     }
   }
-  
-  console.log(<span class="text-white">`Received ${processedIdeas.size} ideas in ${(Date.now() - startTime) / 1000}s`</span>);
-}</pre>
-          </div>
-        </div>
+}"
+          class="fade-in-delayed"
+          style="animation-delay: 0.3s"
+        />
 
         <p class="doc-text fade-in-delayed" style="animation-delay: 0.4s">
           This example shows how to process streaming AI function call results,
@@ -143,69 +126,53 @@
           different parts of the JSON become available:
         </p>
 
-        <div class="code-block card-noise">
-          <div class="code-window-header flex justify-between items-center">
-            <div class="code-window-dots flex gap-1">
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-            </div>
-            <div class="text-black text-xs font-bold">
-              Path Extraction Example
-            </div>
-          </div>
-          <div class="p-6 bg-black overflow-hidden">
-            <pre
-              class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
-            >
-<span class="text-accent">import</span> { jsonPathReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+        <CodeBlock
+          language="javascript"
+          code="import { jsonPathReader } from 'jsonreader';
 
-<span class="text-accent">async</span> <span class="text-accent">function</span> <span class="text-white">progressiveProfileLoader</span>() {
-  <span class="text-accent">const</span> response = <span class="text-accent">await</span> fetch(<span class="text-white">'/api/user/profile'</span>);
-  <span class="text-accent">const</span> reader = response.body.getReader();
-  
-  <span class="text-gray-400">// Define critical paths to extract as they become available</span>
-  <span class="text-accent">const</span> paths = [
-    <span class="text-white">'user.name'</span>,              <span class="text-gray-400">// Critical information</span>
-    <span class="text-white">'user.avatar_url'</span>,
-    <span class="text-white">'user.email'</span>,             <span class="text-gray-400">// Important but not critical</span>
-    <span class="text-white">'user.preferences.theme'</span>, <span class="text-gray-400">// Less important details</span>
-    <span class="text-white">'user.recent_activity.*.id'</span>,
-    <span class="text-white">'user.recent_activity.*.title'</span>
+async function progressiveProfileLoader() {
+  const response = await fetch('/api/user/profile');
+  const reader = response.body.getReader();
+
+  // Define critical paths to extract as they become available
+  const paths = [
+    'user.name',                  // Critical information
+    'user.avatar_url',
+    'user.email',                 // Important but not critical
+    'user.preferences.theme',     // Less important details
+    'user.recent_activity.*.id',
+    'user.recent_activity.*.title'
   ];
-  
-  <span class="text-gray-400">// Show loading UI</span>
+
+  // Show loading UI
   showLoadingState();
-  
-  <span class="text-gray-400">// Process each path as it arrives</span>
-  <span class="text-accent">for</span> <span class="text-accent">await</span> (<span class="text-accent">const</span> [value, path] <span class="text-accent">of</span> jsonPathReader(reader, paths)) {
-    console.log(<span class="text-white">`Received ${path}`</span>);
-    
-    <span class="text-gray-400">// Update UI based on what data we received</span>
-    <span class="text-accent">if</span> (path === <span class="text-white">'user.name'</span>) {
+
+  // Process each path as it arrives
+  for await (const [value, path] of jsonPathReader(reader, paths)) {
+    console.log(`Received ${path}`);
+
+    // Update UI based on what data we received
+    if (path === 'user.name') {
       updateHeader(value);
-      document.title = <span class="text-white">`${value}'s Profile`</span>;
-    } 
-    <span class="text-accent">else if</span> (path === <span class="text-white">'user.avatar_url'</span>) {
+      document.title = `${value}'s Profile`;
+    } else if (path === 'user.avatar_url') {
       updateAvatar(value);
-    }
-    <span class="text-accent">else if</span> (path === <span class="text-white">'user.email'</span>) {
+    } else if (path === 'user.email') {
       updateContactInfo(value);
-    }
-    <span class="text-accent">else if</span> (path === <span class="text-white">'user.preferences.theme'</span>) {
+    } else if (path === 'user.preferences.theme') {
       applyTheme(value);
-    }
-    <span class="text-accent">else if</span> (path.match(<span class="text-white">/user\.recent_activity\.\d+\.title/</span>)) {
-      <span class="text-accent">const</span> index = <span class="text-accent">parseInt</span>(path.match(<span class="text-white">/user\.recent_activity\.(\d+)\.title/</span>)[<span class="text-accent">1</span>]);
+    } else if (path.match(/user\.recent_activity\.\d+\.title/)) {
+      const index = parseInt(path.match(/user\.recent_activity\.(\d+)\.title/)[1]);
       updateActivityTitle(index, value);
     }
   }
-  
-  <span class="text-gray-400">// Complete loading</span>
+
+  // Complete loading
   hideLoadingStates();
-}</pre>
-          </div>
-        </div>
+}"
+          class="fade-in-delayed"
+          :style="{ animationDelay: '0.3s' }"
+        />
 
         <p class="doc-text">
           This pattern allows you to update different parts of your UI as soon
@@ -222,87 +189,55 @@
           them entirely into memory:
         </p>
 
-        <div class="code-block card-noise">
-          <div class="code-window-header flex justify-between items-center">
-            <div class="code-window-dots flex gap-1">
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-            </div>
-            <div class="text-black text-xs font-bold">
-              Large File Processing
-            </div>
-          </div>
-          <div class="p-6 bg-black overflow-hidden">
-            <pre
-              class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
-            >
-<span class="text-accent">import</span> { createReadStream } <span class="text-accent">from</span> <span class="text-white">'fs'</span>;
-<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+        <CodeBlock
+          language="javascript"
+          code="import { createReadStream } from 'fs';
+import { jsonReader } from 'jsonreader';
 
-<span class="text-accent">async</span> <span class="text-accent">function</span> <span class="text-white">processLargeJsonFile</span>(filePath) {
-  <span class="text-gray-400">// Create a file stream</span>
-  <span class="text-accent">const</span> fileStream = createReadStream(filePath);
+async function processLargeJsonFile(filePath) {
+  // Create a file stream
+  const fileStream = createReadStream(filePath);
   
-  <span class="text-gray-400">// Convert to a web-standard ReadableStream</span>
-  <span class="text-accent">const</span> webStream = <span class="text-accent">new</span> ReadableStream({
+  // Convert to a web-standard ReadableStream
+  const webStream = new ReadableStream({
     start(controller) {
-      fileStream.on(<span class="text-white">'data'</span>, chunk => {
-        controller.enqueue(<span class="text-accent">new</span> Uint8Array(chunk));
+      fileStream.on('data', chunk => {
+        controller.enqueue(new Uint8Array(chunk));
       });
-      fileStream.on(<span class="text-white">'end'</span>, () => controller.close());
-      fileStream.on(<span class="text-white">'error'</span>, error => controller.error(error));
+      fileStream.on('end', () => controller.close());
+      fileStream.on('error', error => controller.error(error));
     }
   });
   
-  <span class="text-accent">const</span> reader = webStream.getReader();
+  const reader = webStream.getReader();
+  let recordCount = 0;
+  const startTime = Date.now();
   
-  <span class="text-accent">let</span> recordCount = <span class="text-accent">0</span>;
-  <span class="text-accent">const</span> startTime = Date.now();
-  
-  <span class="text-gray-400">// Use JSON reader to process the file</span>
-  <span class="text-accent">for</span> <span class="text-accent">await</span> (<span class="text-accent">const</span> partialData <span class="text-accent">of</span> jsonReader(reader)) {
-    <span class="text-accent">if</span> (partialData.records && Array.isArray(partialData.records)) {
-      <span class="text-accent">const</span> newCount = partialData.records.length;
-      
-      <span class="text-accent">if</span> (newCount > recordCount) {
-        console.log(<span class="text-white">`Processed ${newCount - recordCount} new records`</span>);
+  // Use JSON reader to process the file
+  for await (const partialData of jsonReader(reader)) {
+    if (partialData.records && Array.isArray(partialData.records)) {
+      const newCount = partialData.records.length;
+      if (newCount > recordCount) {
+        console.log(`Processed ${newCount - recordCount} new records`);
         recordCount = newCount;
       }
     }
   }
   
-  console.log(<span class="text-white">`Completed in ${(Date.now() - startTime) / 1000}s`</span>);
-}</pre>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Float to top button -->
-    <div
-      class="fixed bottom-8 right-8 bg-accent hover:bg-accent/90 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg cursor-pointer transition-all duration-300 hover:scale-110"
-      @click="scrollToTop"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="2"
-        stroke="currentColor"
-        class="w-6 h-6"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M4.5 15.75l7.5-7.5 7.5 7.5"
+  console.log(`Completed in ${(Date.now() - startTime) / 1000}s`);
+}"
+          class="fade-in-delayed"
+          :style="{ animationDelay: '0.3s' }"
         />
-      </svg>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import NavigationCard from "../../components/NavigationCard.vue"
+import CodeBlock from "../../components/CodeBlock.vue"
+
 // Create a scroll to top function
 const scrollToTop = () => {
   window.scrollTo({

@@ -12,30 +12,17 @@
           progressively more complete JSON objects as data arrives.
         </p>
 
-        <div
-          class="code-block card-noise fade-in-delayed"
-          style="animation-delay: 0.2s"
-        >
-          <div class="code-window-header flex justify-between items-center">
-            <div class="code-window-dots flex gap-1">
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-            </div>
-            <div class="text-black text-xs font-bold">Basic Usage</div>
-          </div>
-          <div class="p-6 bg-black overflow-hidden">
-            <pre
-              class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
-            >
-<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+        <CodeBlock
+          language="javascript"
+          code="import { jsonReader } from 'jsonreader';
 
-<span class="text-accent">for</span> <span class="text-accent">await</span> (<span class="text-accent">const</span> partialData <span class="text-accent">of</span> jsonReader(reader)) {
-  <span class="text-gray-400">// Process the partial data</span>
+for await (const partialData of jsonReader(reader)) {
+  // Process the partial data
   console.log(partialData);
-}</pre>
-          </div>
-        </div>
+}"
+          class="card-noise fade-in-delayed"
+          style="animation-delay: 0.2s"
+        />
 
         <h3 class="doc-heading-3 fade-in-delayed" style="animation-delay: 0.3s">
           Parameters
@@ -168,42 +155,28 @@
           Using options to customize behavior:
         </p>
 
-        <div
-          class="code-block card-noise fade-in-delayed"
-          style="animation-delay: 0.9s"
-        >
-          <div class="code-window-header flex justify-between items-center">
-            <div class="code-window-dots flex gap-1">
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-            </div>
-            <div class="text-black text-xs font-bold">Advanced Options</div>
-          </div>
-          <div class="p-6 bg-black overflow-hidden">
-            <pre
-              class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
-            >
-<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+        <CodeBlock
+          language="javascript"
+          code="import { jsonReader } from 'jsonreader';
 
-<span class="text-accent">for</span> <span class="text-accent">await</span> (<span class="text-accent">const</span> partialData <span class="text-accent">of</span> jsonReader(reader, {
-  <span class="text-gray-400">// Only yield when these properties are present</span>
-  required: [<span class="text-white">'status'</span>, <span class="text-white">'results'</span>, <span class="text-white">'metadata.timing'</span>],
+for await (const partialData of jsonReader(reader, {
+  // Only yield when these properties are present
+  required: ['status', 'results', 'metadata.timing'],
   
-  <span class="text-gray-400">// Don't include these properties in results</span>
-  silent: [<span class="text-white">'debug_info'</span>],
+  // Don't include these properties in results
+  silent: ['sensitiveData'],
   
-  <span class="text-gray-400">// Add these values to each result</span>
+  // Add these properties to each yielded object
   assign: {
     timestamp: Date.now(),
-    version: <span class="text-white">'1.0.0'</span>
+    requestId: '12345'
   }
 })) {
-  <span class="text-gray-400">// Process the partial data</span>
   updateUI(partialData);
-}</pre>
-          </div>
-        </div>
+}"
+          class="card-noise fade-in-delayed"
+          style="animation-delay: 0.9s"
+        />
       </div>
 
       <div class="doc-section fade-in-delayed" style="animation-delay: 1s">
@@ -215,45 +188,32 @@
           within a larger JSON structure.
         </p>
 
-        <div
-          class="code-block card-noise fade-in-delayed"
-          style="animation-delay: 0.2s"
-        >
-          <div class="code-window-header flex justify-between items-center">
-            <div class="code-window-dots flex gap-1">
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-            </div>
-            <div class="text-black text-xs font-bold">Basic Usage</div>
-          </div>
-          <div class="p-6 bg-black overflow-hidden">
-            <pre
-              class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
-            >
-<span class="text-accent">import</span> { jsonPathReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+        <CodeBlock
+          language="javascript"
+          code="import { jsonPathReader } from 'jsonreader';
 
-<span class="text-accent">const</span> reader = response.body.getReader();
-<span class="text-accent">const</span> paths = [
-  <span class="text-white">'results'</span>, 
-  <span class="text-white">'metadata.timing'</span>, 
-  <span class="text-white">'users.*.name'</span> <span class="text-gray-400">// Wildcard to match names of all users</span>
+const reader = response.body.getReader();
+const paths = [
+  'results',
+  'metadata.timing',
+  'users.*.name' // Wildcard to match names of all users
 ];
 
-<span class="text-accent">for</span> <span class="text-accent">await</span> (<span class="text-accent">const</span> [value, path] <span class="text-accent">of</span> jsonPathReader(reader, paths)) {
-  <span class="text-gray-400">// Each iteration yields a specific value and its path as a tuple</span>
-  console.log(<span class="text-white">`Path: ${path}, Value:`</span>, value);
+for await (const [value, path] of jsonPathReader(reader, paths)) {
+  // Each iteration yields a specific value and its path as a tuple
+  console.log(`Path: ${path}, Value:`, value);
   
-  <span class="text-accent">if</span> (path === <span class="text-white">'results'</span> && Array.isArray(value)) {
-    <span class="text-gray-400">// Handle results array</span>
+  if (path === 'results' && Array.isArray(value)) {
+    // Handle results array
     renderResults(value);
-  } <span class="text-accent">else if</span> (path.startsWith(<span class="text-white">'users.'</span>) && path.endsWith(<span class="text-white">'.name'</span>)) {
-    <span class="text-gray-400">// Handle individual user names matched by wildcard</span>
-    updateUserName(path.split(<span class="text-white">'.'</span>)[1], value);
+  } else if (path.startsWith('users.') && path.endsWith('.name')) {
+    // Handle individual user names matched by wildcard
+    updateUserName(path.split('.')[1], value);
   }
-}</pre>
-          </div>
-        </div>
+}"
+          class="card-noise fade-in-delayed"
+          style="animation-delay: 0.2s"
+        />
 
         <h3 class="doc-heading-3 fade-in-delayed" style="animation-delay: 0.3s">
           Parameters
@@ -386,63 +346,47 @@
           Advanced Usage Example
         </h3>
 
-        <div
-          class="code-block card-noise fade-in-delayed"
-          style="animation-delay: 0.9s"
-        >
-          <div class="code-window-header flex justify-between items-center">
-            <div class="code-window-dots flex gap-1">
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-            </div>
-            <div class="text-black text-xs font-bold">
-              Real-time Search Results
-            </div>
-          </div>
-          <div class="p-6 bg-black overflow-hidden">
-            <pre
-              class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
-            >
-<span class="text-accent">import</span> { jsonPathReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+        <CodeBlock
+          language="javascript"
+          code="import { jsonPathReader } from 'jsonreader';
 
-<span class="text-accent">async</span> <span class="text-accent">function</span> <span class="text-white">searchWithRealtimeResults</span>() {
-  <span class="text-accent">const</span> response = <span class="text-accent">await</span> fetch(<span class="text-white">'https://api.search-service.com/search?q=jsonreader'</span>);
-  <span class="text-accent">const</span> reader = response.body.getReader();
-  
-  <span class="text-accent">let</span> resultCount = <span class="text-white">0</span>;
-  <span class="text-accent">let</span> lastTimingUpdate = <span class="text-white">null</span>;
-  
-  <span class="text-gray-400">// Monitor both search results and timing information</span>
-  <span class="text-accent">for</span> <span class="text-accent">await</span> (<span class="text-accent">const</span> [value, path] <span class="text-accent">of</span> jsonPathReader(reader, [
-    <span class="text-white">'results'</span>,
-    <span class="text-white">'metadata.timing'</span>,
-    <span class="text-white">'status'</span>
+async function searchWithRealtimeResults() {
+  const response = await fetch('https://api.search-service.com/search?q=jsonreader');
+  const reader = response.body.getReader();
+  let resultCount = 0;
+  let lastTimingUpdate = null;
+
+  // Monitor both search results and timing information
+  for await (const [value, path] of jsonPathReader(reader, [
+    'results',
+    'metadata.timing',
+    'status'
   ])) {
-    <span class="text-accent">if</span> (path === <span class="text-white">'results'</span> && Array.isArray(value)) {
-      <span class="text-gray-400">// New results have arrived</span>
-      <span class="text-accent">const</span> newResults = value.slice(resultCount);
+    if (path === 'results' && Array.isArray(value)) {
+      // New results have arrived
+      const newResults = value.slice(resultCount);
       resultCount = value.length;
       
-      <span class="text-gray-400">// Update the UI with just the new results</span>
+      // Update the UI with just the new results
       appendResultsToUI(newResults);
       updateResultCounter(resultCount);
     }
     
-    <span class="text-accent">if</span> (path === <span class="text-white">'metadata.timing'</span>) {
-      <span class="text-gray-400">// Update performance metrics in real-time</span>
+    if (path === 'metadata.timing') {
+      // Update performance metrics in real-time
       lastTimingUpdate = value;
       updateTimingDisplay(value);
     }
     
-    <span class="text-accent">if</span> (path === <span class="text-white">'status'</span> && value === <span class="text-white">'complete'</span>) {
-      <span class="text-gray-400">// Search is done</span>
+    if (path === 'status' && value === 'complete') {
+      // Search is done
       showCompletionMessage();
     }
   }
-}</pre>
-          </div>
-        </div>
+}"
+          class="card-noise fade-in-delayed"
+          style="animation-delay: 0.9s"
+        />
       </div>
 
       <div class="doc-section fade-in-delayed" style="animation-delay: 1.1s">
@@ -453,32 +397,20 @@
           You should use a try/catch block to handle these errors:
         </p>
 
-        <div class="code-block card-noise">
-          <div class="code-window-header flex justify-between items-center">
-            <div class="code-window-dots flex gap-1">
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-            </div>
-            <div class="text-black text-xs font-bold">
-              Error Handling Example
-            </div>
-          </div>
-          <div class="p-6 bg-black overflow-hidden">
-            <pre
-              class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
-            >
-<span class="text-accent">try</span> {
-  <span class="text-accent">for</span> <span class="text-accent">await</span> (<span class="text-accent">const</span> data <span class="text-accent">of</span> jsonReader(reader)) {
-    <span class="text-gray-400">// Process data</span>
+        <CodeBlock
+          language="javascript"
+          code="try {
+  for await (const data of jsonReader(reader)) {
+    // Process data
     console.log(data);
   }
-} <span class="text-accent">catch</span> (error) {
-  <span class="text-gray-400">// Handle error</span>
-  console.error(<span class="text-white">'JSON parsing error:'</span>, error);
-}</pre>
-          </div>
-        </div>
+} catch (error) {
+  // Handle error
+  console.error('JSON parsing error:', error);
+}"
+          class="card-noise fade-in-delayed"
+          style="animation-delay: 0.3s"
+        />
       </div>
 
       <NavigationCard
@@ -504,27 +436,6 @@
       />
     </div>
 
-    <!-- Float to top button -->
-    <div
-      class="fixed bottom-8 right-8 bg-accent hover:bg-accent/90 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg cursor-pointer transition-all duration-300 hover:scale-110"
-      @click="scrollToTop"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="2"
-        stroke="currentColor"
-        class="w-6 h-6"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M4.5 15.75l7.5-7.5 7.5 7.5"
-        />
-      </svg>
-    </div>
-
     <!-- Floating decorative elements -->
     <div
       class="fixed top-20 right-10 w-32 h-32 rounded-full bg-gradient-to-br from-accent/5 to-transparent blur-3xl pointer-events-none"
@@ -537,6 +448,7 @@
 
 <script setup>
 import NavigationCard from "../../components/NavigationCard.vue"
+import CodeBlock from "../../components/CodeBlock.vue"
 
 // Create a scroll to top function
 const scrollToTop = () => {

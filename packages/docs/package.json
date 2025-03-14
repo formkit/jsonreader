@@ -25,6 +25,8 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "jsonreader": "workspace:*"
+    "jsonreader": "workspace:*",
+    "prismjs": "^1.30.0",
+    "shiki": "^3.2.1"
   }
 }

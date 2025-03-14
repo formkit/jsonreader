@@ -1,0 +1,110 @@
+/**
+ * Additional Prism.js overrides to match Monokai theme
+ */
+
+/* Remove background and border radius from Prism defaults */
+pre[class*="language-"],
+code[class*="language-"] {
+  text-shadow: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-family: "JetBrains Mono", monospace !important;
+  white-space: pre !important;
+  tab-size: 2 !important;
+}
+
+/* Set code block background to Monokai */
+.code-window-content {
+  background-color: #272822 !important;
+}
+
+/* Ensure proper spacing and layout */
+.code-window-content pre {
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+  white-space: pre !important;
+}
+
+.code-window-content code {
+  display: block !important;
+  overflow-x: auto !important;
+  padding: 0 !important;
+  white-space: pre !important;
+  word-spacing: normal !important;
+  word-break: normal !important;
+  word-wrap: normal !important;
+  line-height: 1.5;
+}
+
+/* Token color overrides */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #8292a2 !important;
+}
+
+.token.punctuation {
+  color: #f8f8f2 !important;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #f92672 !important;
+}
+
+.token.boolean,
+.token.number {
+  color: #ae81ff !important;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #a6e22e !important;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+  color: #f8f8f2 !important;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function {
+  color: #e6db74 !important;
+}
+
+.token.keyword {
+  color: #66d9ef !important;
+}
+
+.token.regex,
+.token.important {
+  color: #fd971f !important;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}

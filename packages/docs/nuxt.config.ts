@@ -3,8 +3,8 @@ export default {
   devtools: { enabled: true },
   modules: ["@nuxt/content", "@nuxtjs/tailwindcss"],
 
-  // We can remove the custom CSS import since the Tailwind module will handle it
-  // css: ['~/assets/css/main.css'],
+  // Add our custom CSS files
+  css: ["~/assets/css/prism-override.css"],
 
   tailwindcss: {
     // Tailwind module configuration
@@ -44,26 +44,7 @@ export default {
 
   content: {
     // Content module configuration
-    highlight: {
-      theme: {
-        default: "monokai",
-        dark: "monokai",
-        sepia: "monokai",
-      },
-      preload: [
-        "json",
-        "js",
-        "ts",
-        "html",
-        "css",
-        "vue",
-        "diff",
-        "shell",
-        "markdown",
-        "yaml",
-        "bash",
-      ],
-    },
+    highlight: false, // Disable Nuxt Content's built-in highlighting since we're using Prism.js
     markdown: {
       toc: {
         depth: 3,

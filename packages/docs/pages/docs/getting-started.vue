@@ -42,32 +42,19 @@
         Add jsonreader to your project using your preferred package manager:
       </p>
 
-      <div
-        class="code-block card-noise fade-in-delayed"
-        style="animation-delay: 0.2s"
-      >
-        <div class="code-window-header flex justify-between items-center">
-          <div class="code-window-dots flex gap-1">
-            <div class="code-window-dot"></div>
-            <div class="code-window-dot"></div>
-            <div class="code-window-dot"></div>
-          </div>
-          <div class="text-black text-xs font-bold">INSTALLATION</div>
-        </div>
-        <div class="p-6 bg-black overflow-hidden">
-          <pre
-            class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
-          >
-<span class="text-gray-400"># Using npm</span>
+      <CodeBlock
+        language="bash"
+        code="# Using npm
 npm install jsonreader
 
-<span class="text-gray-400"># Using yarn</span>
+# Using yarn
 yarn add jsonreader
 
-<span class="text-gray-400"># Using pnpm</span>
-pnpm add jsonreader</pre>
-        </div>
-      </div>
+# Using pnpm
+pnpm add jsonreader"
+        class="fade-in-delayed"
+        style="animation-delay: 0.2s"
+      />
 
       <h2 class="doc-heading-2 fade-in-delayed" style="animation-delay: 0.3s">
         Why Use jsonreader?
@@ -111,39 +98,26 @@ pnpm add jsonreader</pre>
         in:
       </p>
 
-      <div
-        class="code-block card-noise fade-in-delayed"
-        style="animation-delay: 0.9s"
-      >
-        <div class="code-window-header flex justify-between items-center">
-          <div class="code-window-dots flex gap-1">
-            <div class="code-window-dot"></div>
-            <div class="code-window-dot"></div>
-            <div class="code-window-dot"></div>
-          </div>
-          <div class="text-black text-xs font-bold">Basic Usage</div>
-        </div>
-        <div class="p-6 bg-black overflow-hidden">
-          <pre
-            class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
-          >
-<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+      <CodeBlock
+        language="javascript"
+        code="import { jsonReader } from 'jsonreader';
 
-<span class="text-accent">async</span> <span class="text-accent">function</span> <span class="text-white">processStreamingData</span>() {
-  <span class="text-gray-400">// Get a stream from somewhere (e.g., fetch API)</span>
-  <span class="text-accent">const</span> response = <span class="text-accent">await</span> fetch(<span class="text-white">'https://api.ai-service.com/v1/generate'</span>);
-  <span class="text-accent">const</span> reader = response.body.getReader();
+async function processStreamingData() {
+  // Get a stream from somewhere (e.g., fetch API)
+  const response = await fetch('https://api.ai-service.com/v1/generate');
+  const reader = response.body.getReader();
   
-  <span class="text-gray-400">// Process JSON as it comes in</span>
-  <span class="text-accent">for</span> <span class="text-accent">await</span> (<span class="text-accent">const</span> partialData <span class="text-accent">of</span> jsonReader(reader)) {
-    console.log(<span class="text-white">'Received partial data:'</span>, partialData);
+  // Process JSON as it comes in
+  for await (const partialData of jsonReader(reader)) {
+    console.log('Received partial data:', partialData);
     
-    <span class="text-gray-400">// Update your UI with partial data</span>
+    // Update your UI with partial data
     updateUI(partialData);
   }
-}</pre>
-        </div>
-      </div>
+}"
+        class="fade-in-delayed"
+        style="animation-delay: 0.9s"
+      />
 
       <p class="doc-text">
         In this example, <code class="inline-code">partialData</code> will
@@ -159,39 +133,27 @@ pnpm add jsonreader</pre>
         available:
       </p>
 
-      <div class="code-block card-noise">
-        <div class="code-window-header flex justify-between items-center">
-          <div class="code-window-dots flex gap-1">
-            <div class="code-window-dot"></div>
-            <div class="code-window-dot"></div>
-            <div class="code-window-dot"></div>
-          </div>
-          <div class="text-black text-xs font-bold">Path Extraction</div>
-        </div>
-        <div class="p-6 bg-black overflow-hidden">
-          <pre
-            class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
-          >
-<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+      <CodeBlock
+        language="javascript"
+        code="import { jsonReader } from 'jsonreader';
 
-<span class="text-accent">async</span> <span class="text-accent">function</span> <span class="text-white">processToolResults</span>() {
-  <span class="text-accent">const</span> response = <span class="text-accent">await</span> fetch(<span class="text-white">'https://api.ai-service.com/v1/generate'</span>);
-  <span class="text-accent">const</span> reader = response.body.getReader();
+async function processToolResults() {
+  const response = await fetch('https://api.ai-service.com/v1/generate');
+  const reader = response.body.getReader();
   
-  <span class="text-gray-400">// Extract the 'results' array as soon as elements appear</span>
-  <span class="text-accent">for</span> <span class="text-accent">await</span> (<span class="text-accent">const</span> { results } <span class="text-accent">of</span> jsonReader(reader, {
-    required: [<span class="text-white">'results'</span>]
+  // Extract the 'results' array as soon as elements appear
+  for await (const { results } of jsonReader(reader, {
+    required: ['results']
   })) {
-    <span class="text-accent">if</span> (results?.length) {
-      <span class="text-gray-400">// Process each batch of results as they arrive</span>
-      <span class="text-accent">for</span> (<span class="text-accent">const</span> item <span class="text-accent">of</span> results) {
+    if (results?.length) {
+      // Process each batch of results as they arrive
+      for (const item of results) {
         renderResultItem(item);
       }
     }
   }
-}</pre>
-        </div>
-      </div>
+}"
+      />
 
       <p class="doc-text">
         This approach is particularly useful when working with AI tool calls
@@ -206,41 +168,31 @@ pnpm add jsonreader</pre>
         <code class="inline-code">jsonPathReader</code> function:
       </p>
 
-      <div class="code-block card-noise">
-        <div class="code-window-header flex justify-between items-center">
-          <div class="code-window-dots flex gap-1">
-            <div class="code-window-dot"></div>
-            <div class="code-window-dot"></div>
-            <div class="code-window-dot"></div>
-          </div>
-          <div class="text-black text-xs font-bold">jsonPathReader Example</div>
-        </div>
-        <div class="p-6 bg-black overflow-hidden">
-          <pre
-            class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
-          >
-<span class="text-accent">import</span> { jsonPathReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+      <CodeBlock
+        language="javascript"
+        code="import { jsonPathReader } from 'jsonreader';
 
-<span class="text-gray-400">// Define paths to extract</span>
-<span class="text-accent">const</span> paths = [
-  <span class="text-white">'results'</span>,
-  <span class="text-white">'progress'</span>,
-  <span class="text-white">'metadata.timing'</span>,
-  <span class="text-white">'items.*.id'</span> <span class="text-gray-400">// Use wildcard to match all item IDs</span>
+// Define paths to extract
+const paths = [
+  'results',
+  'progress',
+  'metadata.timing',
+  'items.*.id' // Use wildcard to match all item IDs
 ];
 
-<span class="text-accent">for</span> <span class="text-accent">await</span> (<span class="text-accent">const</span> [value, path] <span class="text-accent">of</span> jsonPathReader(reader, paths)) {
-  <span class="text-accent">if</span> (path === <span class="text-white">'results'</span>) {
+for await (const [value, path] of jsonPathReader(reader, paths)) {
+  if (path === 'results') {
     updateResultsList(value);
-  } <span class="text-accent">else if</span> (path === <span class="text-white">'progress'</span>) {
+  } else if (path === 'progress') {
     updateProgressBar(value);
-  } <span class="text-accent">else if</span> (path.startsWith(<span class="text-white">'items.'</span>) && path.endsWith(<span class="text-white">'.id'</span>)) {
-    <span class="text-gray-400">// Handle individual item IDs matched by the wildcard</span>
+  } else if (path.startsWith('items.') && path.endsWith('.id')) {
+    // Handle individual item IDs matched by the wildcard
     trackItem(value);
   }
-}</pre>
-        </div>
-      </div>
+}"
+        class="fade-in-delayed"
+        :style="{ animationDelay: '0.3s' }"
+      />
 
       <p class="doc-text">
         The <code class="inline-code">jsonPathReader</code> approach is ideal
@@ -255,30 +207,20 @@ pnpm add jsonreader</pre>
 
       <p class="doc-text">JSONReader will throw an error when parsing fails:</p>
 
-      <div class="code-block card-noise">
-        <div class="code-window-header flex justify-between items-center">
-          <div class="code-window-dots flex gap-1">
-            <div class="code-window-dot"></div>
-            <div class="code-window-dot"></div>
-            <div class="code-window-dot"></div>
-          </div>
-          <div class="text-black text-xs font-bold">Error Handling Example</div>
-        </div>
-        <div class="p-6 bg-black overflow-hidden">
-          <pre
-            class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
-          >
-<span class="text-accent">try</span> {
-  <span class="text-accent">for</span> <span class="text-accent">await</span> (<span class="text-accent">const</span> data <span class="text-accent">of</span> jsonReader(reader)) {
-    <span class="text-gray-400">// Process JSON data</span>
+      <CodeBlock
+        language="javascript"
+        code="try {
+  for await (const data of jsonReader(reader)) {
+    // Process JSON data
     updateUI(data);
   }
-} <span class="text-accent">catch</span> (error) {
-  <span class="text-gray-400">// Handle any errors</span>
-  console.error(<span class="text-white">'Error processing JSON:'</span>, error);
-}</pre>
-        </div>
-      </div>
+} catch (error) {
+  // Handle any errors
+  console.error('Error processing JSON:', error);
+}"
+        class="fade-in-delayed"
+        :style="{ animationDelay: '0.3s' }"
+      />
 
       <NavigationCard
         title="Next Steps"
@@ -303,27 +245,6 @@ pnpm add jsonreader</pre>
       />
     </div>
 
-    <!-- Float to top button -->
-    <div
-      class="fixed bottom-8 right-8 bg-accent hover:bg-accent/90 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg cursor-pointer transition-all duration-300 hover:scale-110"
-      @click="scrollToTop"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="2"
-        stroke="currentColor"
-        class="w-6 h-6"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M4.5 15.75l7.5-7.5 7.5 7.5"
-        />
-      </svg>
-    </div>
-
     <!-- Decorative elements -->
     <div
       class="fixed top-20 right-10 w-32 h-32 rounded-full bg-gradient-to-br from-accent/5 to-transparent blur-3xl pointer-events-none"
@@ -336,6 +257,7 @@ pnpm add jsonreader</pre>
 
 <script setup>
 import NavigationCard from "../../components/NavigationCard.vue"
+import CodeBlock from "../../components/CodeBlock.vue"
 
 // Create a scroll to top function
 const scrollToTop = () => {

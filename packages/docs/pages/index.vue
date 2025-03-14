@@ -61,38 +61,20 @@
           </div>
 
           <!-- Simple Code Example -->
-          <div class="code-window mt-12 max-w-3xl mx-auto fade-in card-noise">
-            <div class="code-window-header flex justify-between items-center">
-              <div class="code-window-dots flex gap-1">
-                <div class="code-window-dot"></div>
-                <div class="code-window-dot"></div>
-                <div class="code-window-dot"></div>
-              </div>
-              <div class="text-black text-xs font-bold">
-                Simple Usage Example
-              </div>
-            </div>
-            <div class="p-6 bg-black overflow-hidden relative text-left">
-              <!-- Code content with typing effect -->
-              <pre
-                class="text-white overflow-x-auto font-mono text-sm leading-relaxed"
-              >
-<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+          <CodeBlock
+            language="javascript"
+            code="import { jsonReader } from 'jsonreader';
 
-<span class="text-gray-400">// Get a reader from a streaming response</span>
-<span class="text-accent">const</span> reader = response.body.getReader();
+// Get a reader from a streaming response
+const reader = response.body.getReader();
 
-<span class="text-gray-400">// Process JSON as it comes in</span>
-<span class="text-accent">for</span> <span class="text-accent">await</span> (<span class="text-accent">const</span> data <span class="text-accent">of</span> jsonReader(reader)) {
-  <span class="text-gray-400">// Use partial results immediately</span>
+// Process JSON as it comes in
+for await (const data of jsonReader(reader)) {
+  // Use partial results immediately
   updateUI(data);
-}</pre>
-              <!-- Pattern background overlay -->
-              <div
-                class="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none"
-              ></div>
-            </div>
-          </div>
+}"
+            class="mt-12 max-w-3xl mx-auto fade-in"
+          />
         </div>
       </div>
     </section>
@@ -429,32 +411,19 @@
           ></span>
         </h3>
 
-        <div
-          class="code-block card-noise fade-in-delayed mb-16"
-          style="animation-delay: 0.2s"
-        >
-          <div class="code-window-header flex justify-between items-center">
-            <div class="code-window-dots flex gap-1">
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-            </div>
-            <div class="text-black text-xs font-bold">INSTALLATION</div>
-          </div>
-          <div class="p-6 bg-black overflow-hidden">
-            <pre
-              class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
-            >
-<span class="text-gray-400"># Using npm</span>
+        <CodeBlock
+          language="bash"
+          code="# Using npm
 npm install jsonreader
 
-<span class="text-gray-400"># Using yarn</span>
+# Using yarn
 yarn add jsonreader
 
-<span class="text-gray-400"># Using pnpm</span>
-pnpm add jsonreader</pre>
-          </div>
-        </div>
+# Using pnpm
+pnpm add jsonreader"
+          class="card-noise fade-in-delayed mb-16"
+          style="animation-delay: 0.2s"
+        />
 
         <h3
           class="text-2xl font-bold mb-6 text-black relative inline-block fade-in-delayed mt-24"
@@ -545,36 +514,25 @@ pnpm add jsonreader</pre>
           streams in:
         </p>
 
-        <div class="code-block card-noise mb-16">
-          <div class="code-window-header flex justify-between items-center">
-            <div class="code-window-dots flex gap-1">
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-            </div>
-            <div class="text-black text-xs font-bold">Basic Usage</div>
-          </div>
-          <div class="p-6 bg-black overflow-hidden">
-            <pre
-              class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
-            >
-<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+        <CodeBlock
+          language="javascript"
+          code="import { jsonReader } from 'jsonreader';
 
-<span class="text-accent">async</span> <span class="text-accent">function</span> <span class="text-white">processStreamingData</span>() {
-  <span class="text-gray-400">// Get a stream from somewhere (e.g., fetch API)</span>
-  <span class="text-accent">const</span> response = <span class="text-accent">await</span> fetch(<span class="text-white">'https://api.ai-service.com/v1/generate'</span>);
-  <span class="text-accent">const</span> reader = response.body.getReader();
+async function processStreamingData() {
+  // Get a stream from somewhere (e.g., fetch API)
+  const response = await fetch('https://api.ai-service.com/v1/generate');
+  const reader = response.body.getReader();
   
-  <span class="text-gray-400">// Process JSON as it comes in</span>
-  <span class="text-accent">for</span> <span class="text-accent">await</span> (<span class="text-accent">const</span> partialData <span class="text-accent">of</span> jsonReader(reader)) {
-    console.log(<span class="text-white">'Received partial data:'</span>, partialData);
+  // Process JSON as it comes in
+  for await (const partialData of jsonReader(reader)) {
+    console.log('Received partial data:', partialData);
     
-    <span class="text-gray-400">// Update your UI with partial data</span>
+    // Update your UI with partial data
     updateUI(partialData);
   }
-}</pre>
-          </div>
-        </div>
+}"
+          class="card-noise mb-16"
+        />
 
         <p class="doc-text my-4">
           In this example, <code class="inline-code">partialData</code> will
@@ -636,41 +594,28 @@ pnpm add jsonreader</pre>
           </p>
         </div>
 
-        <div class="code-block card-noise mb-16">
-          <div class="code-window-header flex justify-between items-center">
-            <div class="code-window-dots flex gap-1">
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-            </div>
-            <div class="text-black text-xs font-bold">
-              Configuration Options Example
-            </div>
-          </div>
-          <div class="p-6 bg-black overflow-hidden">
-            <pre
-              class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
-            >
-<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+        <CodeBlock
+          language="javascript"
+          code="import { jsonReader } from 'jsonreader';
 
-<span class="text-accent">for</span> <span class="text-accent">await</span> (<span class="text-accent">const</span> data <span class="text-accent">of</span> jsonReader(reader, {
-  <span class="text-gray-400">// Won't yield anything until 'metadata' is complete</span>
-  required: [<span class="text-white">'metadata'</span>],
+for await (const data of jsonReader(reader, {
+  // Won't yield anything until 'metadata' is complete
+  required: ['metadata'],
   
-  <span class="text-gray-400">// Pauses yielding while 'sensitiveData' is streaming</span>
-  silent: [<span class="text-white">'sensitiveData'</span>],
+  // Pauses yielding while 'sensitiveData' is streaming
+  silent: ['sensitiveData'],
   
-  <span class="text-gray-400">// Add these properties to each yielded object</span>
+  // Add these properties to each yielded object
   assign: {
     timestamp: Date.now(),
-    source: <span class="text-white">'api-endpoint'</span>
+    source: 'api-endpoint'
   }
 })) {
-  <span class="text-gray-400">// Update UI with augmented data</span>
+  // Update UI with augmented data
   updateUI(data);
-}</pre>
-          </div>
-        </div>
+}"
+          class="card-noise mb-16"
+        />
 
         <h3
           class="text-2xl font-bold mb-6 text-black relative inline-block mt-24"
@@ -688,39 +633,26 @@ pnpm add jsonreader</pre>
           array item at a given position.
         </p>
 
-        <div class="code-block card-noise mb-16">
-          <div class="code-window-header flex justify-between items-center">
-            <div class="code-window-dots flex gap-1">
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-              <div class="code-window-dot"></div>
-            </div>
-            <div class="text-black text-xs font-bold">
-              jsonPathReader Example
-            </div>
-          </div>
-          <div class="p-6 bg-black overflow-hidden">
-            <pre
-              class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
-            >
-<span class="text-accent">import</span> { jsonPathReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+        <CodeBlock
+          language="javascript"
+          code="import { jsonPathReader } from 'jsonreader';
 
-<span class="text-accent">for</span> <span class="text-accent">await</span> (<span class="text-accent">const</span> [value, path] <span class="text-accent">of</span> jsonPathReader(reader, [
-  <span class="text-white">'results'</span>,
-  <span class="text-white">'progress'</span>,
-  <span class="text-white">'data.*.name'</span>  <span class="text-gray-400">// Wildcard to match all names</span>
+for await (const [value, path] of jsonPathReader(reader, [
+  'results',
+  'progress',
+  'data.*.name'  // Wildcard to match all names
 ])) {
-  <span class="text-accent">if</span> (path === <span class="text-white">'results'</span>) {
+  if (path === 'results') {
     updateResultsList(value);
-  } <span class="text-accent">else if</span> (path === <span class="text-white">'progress'</span>) {
+  } else if (path === 'progress') {
     updateProgressBar(value);
-  } <span class="text-accent">else if</span> (path.includes(<span class="text-white">'.'</span>)) {
-    <span class="text-gray-400">// Handle wildcard matches</span>
+  } else if (path.includes('.')) {
+    // Handle wildcard matches
     handleItem(path, value);
   }
-}</pre>
-          </div>
-        </div>
+}"
+          class="card-noise mb-16"
+        />
 
         <div class="flex justify-center mt-8">
           <a
@@ -743,6 +675,7 @@ pnpm add jsonreader</pre>
 <script setup>
 import { onMounted } from "vue"
 import Logo from "../components/Logo.vue"
+import CodeBlock from "../components/CodeBlock.vue"
 
 // Create a grid pattern background effect for code blocks
 const createBackgroundGridPattern = () => {
