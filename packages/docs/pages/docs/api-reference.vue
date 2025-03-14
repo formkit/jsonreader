@@ -418,7 +418,7 @@ async function searchWithRealtimeResults() {
         :links="[
           {
             title: 'Getting Started Guide',
-            url: '/docs/getting-started',
+            url: '/#get-started',
             description: 'Basic usage and concepts',
           },
           {
