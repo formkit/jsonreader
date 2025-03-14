@@ -3,25 +3,28 @@
     <!-- Hero Section with enhanced design -->
     <section class="relative py-20 overflow-hidden">
       <!-- Background falling blocks animation -->
-      <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div class="falling-blocks-container">
-          <div
-            v-for="i in 20"
-            :key="i"
-            class="falling-block"
-            :style="generateBlockStyle()"
-          ></div>
-          <!-- JSON symbol blocks -->
-          <div
-            v-for="i in 10"
-            :key="`json-${i}`"
-            class="falling-json-symbol"
-            :style="generateJsonSymbolStyle()"
-          >
-            {{ getRandomJsonSymbol() }}
+      <ClientOnly>
+        <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <div class="falling-blocks-container">
+            <div
+              v-for="i in 20"
+              :key="i"
+              class="falling-block"
+              :style="generateBlockStyle()"
+            ></div>
+            <!-- JSON symbol blocks -->
+            <div
+              v-for="i in 10"
+              :key="`json-${i}`"
+              class="falling-json-symbol"
+              :style="generateJsonSymbolStyle()"
+            >
+              {{ getRandomJsonSymbol() }}
+            </div>
           </div>
         </div>
-      </div>
+      </ClientOnly>
+
       <div class="container mx-auto px-4 relative z-10">
         <div class="max-w-4xl mx-auto text-center mb-12">
           <!-- Title with enhanced animation -->
