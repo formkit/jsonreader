@@ -63,7 +63,7 @@
           <!-- Simple Code Example -->
           <CodeBlock
             language="javascript"
-            code="import { jsonReader } from 'jsonreader';
+            code="import { jsonReader } from '@formkit/jsonreader';
 
 // Get a reader from a streaming response
 const reader = response.body.getReader();
@@ -516,7 +516,7 @@ pnpm add jsonreader"
 
         <CodeBlock
           language="javascript"
-          code="import { jsonReader } from 'jsonreader';
+          code="import { jsonReader } from '@formkit/jsonreader';
 
 async function processStreamingData() {
   // Get a stream from somewhere (e.g., fetch API)
@@ -596,7 +596,7 @@ async function processStreamingData() {
 
         <CodeBlock
           language="javascript"
-          code="import { jsonReader } from 'jsonreader';
+          code="import { jsonReader } from '@formkit/jsonreader';
 
 for await (const data of jsonReader(reader, {
   // Won't yield anything until 'metadata' is complete
@@ -635,7 +635,7 @@ for await (const data of jsonReader(reader, {
 
         <CodeBlock
           language="javascript"
-          code="import { jsonPathReader } from 'jsonreader';
+          code="import { jsonPathReader } from '@formkit/jsonreader';
 
 for await (const [value, path] of jsonPathReader(reader, [
   'results',

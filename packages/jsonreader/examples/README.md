@@ -1,6 +1,8 @@
-# jsonreader Examples
+# @formkit/jsonreader Examples
 
-This directory contains examples demonstrating how to use the `jsonreader` package for streaming JSON processing.
+[![Tests](https://github.com/formkit/jsonreader/actions/workflows/tests.yml/badge.svg)](https://github.com/formkit/jsonreader/actions/workflows/tests.yml)
+
+This directory contains examples demonstrating how to use the `@formkit/jsonreader` package for streaming JSON processing.
 
 ## Running the Examples
 
@@ -30,7 +32,7 @@ node examples/basic-usage.js
 ## Available Examples
 
 1. **Basic Usage** (`basic-usage.ts`)
-   - Demonstrates the fundamental usage patterns of jsonreader
+   - Demonstrates the fundamental usage patterns of @formkit/jsonreader
    - Shows how to use `jsonReader` with fetch API
    - Shows how to use `jsonPathReader` to extract specific paths
    - Shows how to use options to control when data is yielded
@@ -43,7 +45,7 @@ node examples/basic-usage.js
 
 ## Example Code Structure
 
-Each example file is structured to demonstrate specific features of the `jsonreader` package:
+Each example file is structured to demonstrate specific features of the `@formkit/jsonreader` package:
 
 - **Import**: Import the necessary functions from the package
 - **Setup**: Create a ReadableStream or obtain one from an API

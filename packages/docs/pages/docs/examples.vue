@@ -49,7 +49,7 @@
 
         <CodeBlock
           language="javascript"
-          code="import { jsonReader } from 'jsonreader';
+          code="import { jsonReader } from '@formkit/jsonreader';
 
 async function processAIFunctionCall() {
   // Call an AI model with function calling enabled
@@ -128,7 +128,7 @@ async function processAIFunctionCall() {
 
         <CodeBlock
           language="javascript"
-          code="import { jsonPathReader } from 'jsonreader';
+          code="import { jsonPathReader } from '@formkit/jsonreader';
 
 async function progressiveProfileLoader() {
   const response = await fetch('/api/user/profile');
@@ -192,7 +192,7 @@ async function progressiveProfileLoader() {
         <CodeBlock
           language="javascript"
           code="import { createReadStream } from 'fs';
-import { jsonReader } from 'jsonreader';
+import { jsonReader } from '@formkit/jsonreader';
 
 async function processLargeJsonFile(filePath) {
   // Create a file stream

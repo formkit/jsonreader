@@ -1,6 +1,6 @@
 {
-  "name": "jsonreader",
-  "version": "0.1.0",
+  "name": "@formkit/jsonreader",
+  "version": "1.0.1",
   "description": "A utility for reading and parsing JSON streams in real-time",
   "type": "module",
   "main": "dist/index.js",
@@ -37,16 +37,16 @@
     "progressive",
     "esm"
   ],
-  "author": "",
+  "author": "Justin Schroeder <justin@formkit.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/username/jsonreader.git"
+    "url": "git+https://github.com/formkit/jsonreader.git"
   },
   "bugs": {
-    "url": "https://github.com/username/jsonreader/issues"
+    "url": "https://github.com/formkit/jsonreader/issues"
   },
-  "homepage": "https://github.com/username/jsonreader#readme",
+  "homepage": "https://github.com/formkit/jsonreader#readme",
   "engines": {
     "node": ">=18.0.0"
   },
@@ -60,6 +60,6 @@
     "eslint": "^8.55.0",
     "typescript": "^5.3.2",
     "tsup": "^8.0.1",
-    "vitest": "^1.0.1"
+    "vitest": "^3.0.8"
   }
 } 

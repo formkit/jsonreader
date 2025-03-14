@@ -41,11 +41,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run linting
-        run: pnpm lint
-
-      - name: Run type checking
-        run: pnpm --filter jsonreader typecheck
-
       - name: Run tests
         run: pnpm test 

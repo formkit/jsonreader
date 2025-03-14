@@ -1,10 +1,12 @@
 # jsonreader monorepo
 
-This is a monorepo for the `jsonreader` package and its documentation site.
+[![Tests](https://github.com/formkit/jsonreader/actions/workflows/tests.yml/badge.svg)](https://github.com/formkit/jsonreader/actions/workflows/tests.yml)
+
+This is a monorepo for the `@formkit/jsonreader` package and its documentation site.
 
 ## About jsonreader
 
-`jsonreader` is a specialized utility for processing JSON data from streams in real-time. Unlike traditional JSON parsers that require the entire payload before processing, `jsonreader` allows you to:
+`@formkit/jsonreader` is a specialized utility for processing JSON data from streams in real-time. Unlike traditional JSON parsers that require the entire payload before processing, `@formkit/jsonreader` allows you to:
 
 - Process JSON progressively as it arrives from a stream
 - Extract specific properties as soon as they become available
@@ -35,7 +37,7 @@ Each commercial project requires a separate license. See the [documentation](htt
 ## Quick Start
 
 ```typescript
-import { jsonReader, jsonPathReader } from 'jsonreader';
+import { jsonReader, jsonPathReader } from '@formkit/jsonreader';
 
 // Get a stream reader (e.g. from fetch API)
 const response = await fetch('https://api.example.com/large-data.json');

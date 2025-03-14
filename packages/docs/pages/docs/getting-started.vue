@@ -100,7 +100,7 @@ pnpm add jsonreader"
 
       <CodeBlock
         language="javascript"
-        code="import { jsonReader } from 'jsonreader';
+        code="import { jsonReader } from '@formkit/jsonreader';
 
 async function processStreamingData() {
   // Get a stream from somewhere (e.g., fetch API)
@@ -135,7 +135,7 @@ async function processStreamingData() {
 
       <CodeBlock
         language="javascript"
-        code="import { jsonReader } from 'jsonreader';
+        code="import { jsonReader } from '@formkit/jsonreader';
 
 async function processToolResults() {
   const response = await fetch('https://api.ai-service.com/v1/generate');
@@ -170,7 +170,7 @@ async function processToolResults() {
 
       <CodeBlock
         language="javascript"
-        code="import { jsonPathReader } from 'jsonreader';
+        code="import { jsonPathReader } from '@formkit/jsonreader';
 
 // Define paths to extract
 const paths = [

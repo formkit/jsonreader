@@ -14,7 +14,7 @@
 
         <CodeBlock
           language="javascript"
-          code="import { jsonReader } from 'jsonreader';
+          code="import { jsonReader } from '@formkit/jsonreader';
 
 for await (const partialData of jsonReader(reader)) {
   // Process the partial data
@@ -157,7 +157,7 @@ for await (const partialData of jsonReader(reader)) {
 
         <CodeBlock
           language="javascript"
-          code="import { jsonReader } from 'jsonreader';
+          code="import { jsonReader } from '@formkit/jsonreader';
 
 for await (const partialData of jsonReader(reader, {
   // Only yield when these properties are present
@@ -190,7 +190,7 @@ for await (const partialData of jsonReader(reader, {
 
         <CodeBlock
           language="javascript"
-          code="import { jsonPathReader } from 'jsonreader';
+          code="import { jsonPathReader } from '@formkit/jsonreader';
 
 const reader = response.body.getReader();
 const paths = [
@@ -348,7 +348,7 @@ for await (const [value, path] of jsonPathReader(reader, paths)) {
 
         <CodeBlock
           language="javascript"
-          code="import { jsonPathReader } from 'jsonreader';
+          code="import { jsonPathReader } from '@formkit/jsonreader';
 
 async function searchWithRealtimeResults() {
   const response = await fetch('https://api.search-service.com/search?q=jsonreader');
