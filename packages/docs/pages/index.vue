@@ -285,7 +285,7 @@ for await (const data of jsonReader(reader)) {
               Lightweight & Fast
             </h3>
             <p class="text-black">
-              Zero dependencies and minimal overhead, ensuring maximum
+              Super lightweight (1.6Kb min-gzip) and minimal overhead, ensuring maximum
               performance even with large streaming datasets.
             </p>
           </div>
