@@ -1,8 +1,27 @@
 <template>
   <div class="min-h-screen">
     <!-- Hero Section with enhanced design -->
-    <section class="relative py-20 overflow-hidden hero-bg">
-      <div class="absolute inset-0 noise-bg opacity-50"></div>
+    <section class="relative py-20 overflow-hidden">
+      <!-- Background falling blocks animation -->
+      <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="falling-blocks-container">
+          <div
+            v-for="i in 20"
+            :key="i"
+            class="falling-block"
+            :style="generateBlockStyle()"
+          ></div>
+          <!-- JSON symbol blocks -->
+          <div
+            v-for="i in 10"
+            :key="`json-${i}`"
+            class="falling-json-symbol"
+            :style="generateJsonSymbolStyle()"
+          >
+            {{ getRandomJsonSymbol() }}
+          </div>
+        </div>
+      </div>
       <div class="container mx-auto px-4 relative z-10">
         <div class="max-w-4xl mx-auto text-center mb-12">
           <!-- Title with enhanced animation -->
@@ -51,7 +70,7 @@
                     d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
                   />
                 </svg>
-                GitHub
+                Star on GitHub
                 <span
                   class="ml-1 transition-transform group-hover:translate-x-1"
                   >→</span
@@ -673,9 +692,72 @@ for await (const [value, path] of jsonPathReader(reader, [
 </template>
 
 <script setup>
-import { onMounted } from "vue"
+import { onMounted, ref } from "vue"
 import Logo from "../components/Logo.vue"
 import CodeBlock from "../components/CodeBlock.vue"
+
+// Function to get a random JSON symbol
+const getRandomJsonSymbol = () => {
+  const symbols = ["{", "}", "[", "]", ":", ",", '"', "."]
+  return symbols[Math.floor(Math.random() * symbols.length)]
+}
+
+// Function to generate styles for JSON symbol blocks
+const generateJsonSymbolStyle = () => {
+  const left = Math.floor(Math.random() * 100) // Position across the screen
+  const delay = Math.random() * 5 // Random delay
+  const duration = Math.random() * 15 + 15 // Animation duration between 15-30s
+  const size = Math.floor(Math.random() * 20) + 20 // Size between 20px and 40px
+  const opacity = Math.random() * 0.1 + 0.05 // Low opacity between 0.05-0.15
+
+  return {
+    left: `${left}%`,
+    animationDelay: `${delay}s`,
+    animationDuration: `${duration}s`,
+    opacity: opacity,
+    fontSize: `${size}px`,
+    transform: `rotate(${Math.floor(Math.random() * 20 - 10)}deg)`, // Slight rotation
+  }
+}
+
+// Function to generate random styles for falling blocks
+const generateBlockStyle = () => {
+  const size = Math.floor(Math.random() * 40) + 10 // Size between 10px and 50px
+  const left = Math.floor(Math.random() * 100) // Position across the screen
+  const delay = Math.random() * 5 // Random delay
+  const duration = Math.random() * 10 + 10 // Animation duration between 10-20s
+  const opacity = Math.random() * 0.08 + 0.02 // Low opacity between 0.02-0.1
+
+  // Choose random shape type
+  const shapeTypes = ["square", "rectangle", "circle", "diamond"]
+  const shapeType = shapeTypes[Math.floor(Math.random() * shapeTypes.length)]
+
+  // Base styles
+  const styles = {
+    width: `${size}px`,
+    height: `${size}px`,
+    left: `${left}%`,
+    animationDelay: `${delay}s`,
+    animationDuration: `${duration}s`,
+    opacity: opacity,
+    transform: `rotate(${Math.floor(Math.random() * 360)}deg)`,
+  }
+
+  // Apply shape-specific styles
+  if (shapeType === "rectangle") {
+    styles.width = `${size * 1.5}px`
+    styles.height = `${size * 0.7}px`
+  } else if (shapeType === "circle") {
+    styles.borderRadius = "50%"
+  } else if (shapeType === "diamond") {
+    styles.transform += " rotate(45deg)"
+  }
+
+  // Add subtle shadow
+  styles.boxShadow = "0 0 8px rgba(0, 122, 255, 0.1)"
+
+  return styles
+}
 
 // Create a grid pattern background effect for code blocks
 const createBackgroundGridPattern = () => {
@@ -870,5 +952,44 @@ onMounted(() => {
   margin-left: 0;
   color: var(--color-text-secondary);
   line-height: 1.4;
+}
+
+/* Falling Blocks Animation */
+.falling-blocks-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.falling-block {
+  position: absolute;
+  top: -60px;
+  background-color: var(--color-accent, #3b82f6);
+  border-radius: 4px;
+  animation: fall linear infinite;
+  z-index: 0;
+}
+
+.falling-json-symbol {
+  position: absolute;
+  top: -60px;
+  color: var(--color-accent, #3b82f6);
+  font-family: monospace;
+  font-weight: bold;
+  animation: fall linear infinite;
+  z-index: 0;
+  text-shadow: 0 0 5px rgba(59, 130, 246, 0.15);
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+  }
 }
 </style>
