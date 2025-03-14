@@ -11,6 +11,14 @@ This is a monorepo for the `jsonreader` package and its documentation site.
 - Update UI elements in real-time without waiting for the complete response
 - Handle large JSON payloads efficiently by processing them incrementally
 
+## License
+
+**Dual License:**
+- **Personal Use**: 100% free for personal projects, open source contributions, and learning.
+- **Commercial Use**: $10 per project for commercial applications. [Purchase a license](https://buy.stripe.com/14k7uU7jqc7x4jmdQS).
+
+Each commercial project requires a separate license. See the [documentation](https://jsonreader.dev) for more details.
+
 ## Repository Structure
 
 - `packages/jsonreader`: The ESM package for streaming JSON processing
@@ -103,8 +111,4 @@ The documentation site provides comprehensive guides and API references:
 pnpm dev:docs
 ```
 
-See the [jsonreader README](./packages/jsonreader/README.md) for detailed API documentation.
-
-## License
-
-MIT 
+See the [jsonreader README](./packages/jsonreader/README.md) for detailed API documentation. 

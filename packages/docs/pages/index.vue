@@ -24,8 +24,8 @@
         <div class="max-w-4xl mx-auto text-center mb-12">
           <!-- Title with enhanced animation -->
           <div class="inline-block mb-6 relative fade-in">
-            <div class="shimmer-effect">
-              <h1 class="text-5xl md:text-7xl font-bold text-black">
+            <div class="shimmer-effect px-4 py-3">
+              <h1 class="text-5xl md:text-7xl font-bold text-black leading-relaxed pb-2">
                 <span class="text-accent pulse-glow">jsonreader</span>
               </h1>
             </div>
@@ -33,7 +33,7 @@
           
           <p class="text-xl md:text-2xl mb-8 text-black leading-relaxed fade-in-delayed">
             Stream and process <span class="accent-text">JSON responses</span> from <span class="accent-text">AI tool calls</span> as they arrive—<br class="hidden md:block">
-            intelligently tracking state to work with JSON <span class="accent-text">before it's complete</span>
+            intelligently tracking state to produce JSON <span class="accent-text">before it's complete</span>
           </p>
           
           <div class="flex flex-wrap justify-center gap-4 mb-12 slide-up-delayed">
@@ -99,7 +99,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-3 text-black">Real-time AI Tool Calls</h3>
+            <h3 class="text-xl font-bold mb-3 text-black">Ideal for AI Tool Calls</h3>
             <p class="text-black">Process JSON from AI tool calls as they stream, without waiting for the complete payload.</p>
           </div>
 
@@ -134,6 +134,29 @@
             </div>
             <h3 class="text-xl font-bold mb-3 text-black">Smart State Tracking</h3>
             <p class="text-black">Intelligently tracks JSON state during streaming, allowing you to work with usable data before it's fully received.</p>
+          </div>
+          
+          <!-- Feature 5 -->
+          <div class="feature-card slide-up-delayed card-noise" style="animation-delay: 0.9s;">
+            <div class="feature-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-black">Developer Friendly</h3>
+            <p class="text-black">Simple API with full TypeScript support and intuitive configuration, making integration into your project effortless.</p>
+          </div>
+          
+          <!-- Feature 6 -->
+          <div class="feature-card slide-up-delayed card-noise" style="animation-delay: 1.1s;">
+            <div class="feature-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v21m0-21H3.75m0 0h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v21m0 0h-16.5m16.5 0h1.5m-1.5 0H3.75m0 0h-1.5" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-black">Lightweight & Fast</h3>
+            <p class="text-black">Zero dependencies and minimal overhead, ensuring maximum performance even with large streaming datasets.</p>
           </div>
         </div>
       </div>
@@ -230,6 +253,40 @@ yarn add jsonreader
 
 <span class="text-gray-400"># Using pnpm</span>
 pnpm add jsonreader</pre>
+          </div>
+        </div>
+
+        <h3 class="doc-heading-3 mt-8 mb-4 fade-in-delayed">How It Works</h3>
+
+        <div class="bg-accent/5 p-6 rounded-lg border border-accent/20 mb-8 card-noise fade-in-delayed">
+          <div class="flex">
+            <div class="w-full">
+              <p class="text-black mb-4">The <code class="inline-code">jsonreader</code> utility parses JSON data character by character as it arrives from a stream. It builds up a syntactically valid JSON structure as data comes in, closing any unclosed objects or arrays to create valid partial representations.</p>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div class="bg-white/50 p-4 rounded-lg shadow-sm">
+                  <h4 class="font-bold text-lg mb-2 text-accent">Character-by-Character Processing</h4>
+                  <p class="text-black">For each chunk of data received, the stream is decoded from Uint8Array to text and processed character by character, enabling real-time JSON handling.</p>
+                </div>
+                
+                <div class="bg-white/50 p-4 rounded-lg shadow-sm">
+                  <h4 class="font-bold text-lg mb-2 text-accent">Path Tracking</h4>
+                  <p class="text-black">Property paths are tracked as the parser encounters them, allowing for targeted extraction of specific values as they become available.</p>
+                </div>
+                
+                <div class="bg-white/50 p-4 rounded-lg shadow-sm">
+                  <h4 class="font-bold text-lg mb-2 text-accent">Valid Partial Results</h4>
+                  <p class="text-black">When required properties are available, a partial result is yielded with temporarily closed objects/arrays to ensure valid JSON structure.</p>
+                </div>
+                
+                <div class="bg-white/50 p-4 rounded-lg shadow-sm">
+                  <h4 class="font-bold text-lg mb-2 text-accent">Continuous Stream Processing</h4>
+                  <p class="text-black">The process continues incrementally until the stream is complete, providing progressively more complete JSON objects with each iteration.</p>
+                </div>
+              </div>
+              
+              <p class="text-black mt-6">This approach allows for real-time processing of JSON data without waiting for the entire payload to be received, making it ideal for streaming APIs and large datasets.</p>
+            </div>
           </div>
         </div>
 
@@ -501,6 +558,8 @@ onMounted(() => {
 
 .pulse-glow {
   animation: glow 2s ease-in-out infinite alternate;
+  display: inline-block;
+  padding: 0 0.1em;
 }
 
 @keyframes glow {
