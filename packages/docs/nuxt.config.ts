@@ -34,7 +34,7 @@ export default {
 
         // Open Graph tags for social sharing
         { property: "og:type", content: "website" },
-        { property: "og:url", content: "https://jsonreader.com" },
+        { property: "og:url", content: "https://jsonreader.formkit.com" },
         {
           property: "og:title",
           content: "jsonreader - Stream Processing for AI Tool Calls",
@@ -46,12 +46,12 @@ export default {
         },
         {
           property: "og:image",
-          content: "https://jsonreader.com/og.png",
+          content: "https://jsonreader.formkit.com/og.png",
         },
 
         // Twitter Card tags
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:url", content: "https://jsonreader.com" },
+        { name: "twitter:url", content: "https://jsonreader.formkit.com" },
         {
           name: "twitter:title",
           content: "jsonreader - Stream Processing for AI Tool Calls",
@@ -63,7 +63,7 @@ export default {
         },
         {
           name: "twitter:image",
-          content: "https://jsonreader.com/og.png",
+          content: "https://jsonreader.formkit.com/og.png",
         },
       ],
       link: [
