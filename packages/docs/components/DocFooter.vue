@@ -49,7 +49,7 @@
             </li>
             <li>
               <a
-                href="https://www.npmjs.com/package/jsonreader"
+                href="https://www.npmjs.com/package/@formkit/jsonreader"
                 target="_blank"
                 class="text-gray-600 hover:text-accent-1 transition-colors"
                 >npm Package</a
@@ -60,7 +60,7 @@
         <div class="fade-in">
           <h3 class="text-xl font-bold text-black mb-6">About</h3>
           <p class="text-gray-600 mb-6">
-            jsonreader is a utility for processing JSON data from streams in
+            @formkit/jsonreader is a utility for processing JSON data from streams in
             real-time, optimized for AI tool calls and large API responses.
           </p>
           <div class="flex items-center space-x-4">

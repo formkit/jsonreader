@@ -1,5 +1,5 @@
 {
-  "name": "jsonreader",
+  "name": "@formkit/jsonreader",
   "version": "1.0.1",
   "description": "A utility for reading and parsing JSON streams in real-time",
   "type": "module",
@@ -41,12 +41,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/username/jsonreader.git"
+    "url": "git+https://github.com/formkit/jsonreader.git"
   },
   "bugs": {
-    "url": "https://github.com/username/jsonreader/issues"
+    "url": "https://github.com/formkit/jsonreader/issues"
   },
-  "homepage": "https://github.com/username/jsonreader#readme",
+  "homepage": "https://github.com/formkit/jsonreader#readme",
   "engines": {
     "node": ">=18.0.0"
   },

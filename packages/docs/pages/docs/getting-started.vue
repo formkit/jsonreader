@@ -3,7 +3,7 @@
     <div class="absolute inset-0 noise-bg opacity-40"></div>
     <div class="relative z-10">
       <h1 class="doc-heading-1 shimmer-effect">
-        Getting Started with jsonreader
+        Getting Started with @formkit/jsonreader
       </h1>
 
       <div
@@ -28,7 +28,7 @@
           </div>
           <div>
             <p class="text-black">
-              jsonreader is a specialized utility for processing JSON data from
+              @formkit/jsonreader is a specialized utility for processing JSON data from
               streams in real-time, with a particular focus on handling
               responses from AI tool calls efficiently.
             </p>
@@ -39,7 +39,7 @@
       <h2 class="doc-heading-2 fade-in">Installation</h2>
 
       <p class="doc-text fade-in-delayed">
-        Add jsonreader to your project using your preferred package manager:
+        Add @formkit/jsonreader to your project using your preferred package manager:
       </p>
 
       <div
@@ -59,22 +59,22 @@
             class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
           >
 <span class="text-gray-400"># Using npm</span>
-npm install jsonreader
+npm install @formkit/jsonreader
 
 <span class="text-gray-400"># Using yarn</span>
-yarn add jsonreader
+yarn add @formkit/jsonreader
 
 <span class="text-gray-400"># Using pnpm</span>
-pnpm add jsonreader</pre>
+pnpm add @formkit/jsonreader</pre>
         </div>
       </div>
 
       <h2 class="doc-heading-2 fade-in-delayed" style="animation-delay: 0.3s">
-        Why Use jsonreader?
+        Why Use @formkit/jsonreader?
       </h2>
 
       <p class="doc-text fade-in-delayed" style="animation-delay: 0.4s">
-        When working with AI tool calls or any large JSON responses, jsonreader
+        When working with AI tool calls or any large JSON responses, @formkit/jsonreader
         provides several key advantages:
       </p>
 
@@ -107,7 +107,7 @@ pnpm add jsonreader</pre>
       </h3>
 
       <p class="doc-text fade-in-delayed" style="animation-delay: 0.8s">
-        The simplest way to use jsonreader is to process JSON data as it streams
+        The simplest way to use @formkit/jsonreader is to process JSON data as it streams
         in:
       </p>
 
@@ -127,7 +127,7 @@ pnpm add jsonreader</pre>
           <pre
             class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
           >
-<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'@formkit/jsonreader'</span>;
 
 <span class="text-accent">async</span> <span class="text-accent">function</span> <span class="text-white">processStreamingData</span>() {
   <span class="text-gray-400">// Get a stream from somewhere (e.g., fetch API)</span>
@@ -172,7 +172,7 @@ pnpm add jsonreader</pre>
           <pre
             class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
           >
-<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'@formkit/jsonreader'</span>;
 
 <span class="text-accent">async</span> <span class="text-accent">function</span> <span class="text-white">processToolResults</span>() {
   <span class="text-accent">const</span> response = <span class="text-accent">await</span> fetch(<span class="text-white">'https://api.ai-service.com/v1/generate'</span>);
@@ -219,7 +219,7 @@ pnpm add jsonreader</pre>
           <pre
             class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
           >
-<span class="text-accent">import</span> { jsonPathReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+<span class="text-accent">import</span> { jsonPathReader } <span class="text-accent">from</span> <span class="text-white">'@formkit/jsonreader'</span>;
 
 <span class="text-gray-400">// Define paths to extract</span>
 <span class="text-accent">const</span> paths = [
@@ -253,7 +253,7 @@ pnpm add jsonreader</pre>
 
       <h2 class="doc-heading-2">Error Handling</h2>
 
-      <p class="doc-text">JSONReader will throw an error when parsing fails:</p>
+      <p class="doc-text">@formkit/jsonreader will throw an error when parsing fails:</p>
 
       <div class="code-block card-noise">
         <div class="code-window-header flex justify-between items-center">

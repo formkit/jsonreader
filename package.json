@@ -2,11 +2,11 @@
   "name": "jsonreader-monorepo",
   "version": "1.0.1",
   "private": true,
-  "description": "A monorepo for the jsonreader package and its documentation",
+  "description": "A monorepo for the @formkit/jsonreader package and its documentation",
   "scripts": {
     "build": "pnpm -r build",
     "dev:docs": "pnpm --filter docs dev",
-    "dev:jsonreader": "pnpm --filter jsonreader dev",
+    "dev:jsonreader": "pnpm --filter @formkit/jsonreader dev",
     "test": "pnpm -r test",
     "lint": "pnpm -r lint",
     "release": "pnpm build && bumpp -r && cd packages/jsonreader && pnpm publish"

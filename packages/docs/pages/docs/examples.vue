@@ -26,7 +26,7 @@
           </div>
           <div>
             <p class="text-black">
-              Practical examples showing how to use jsonreader in real-world
+              Practical examples showing how to use @formkit/jsonreader in real-world
               scenarios.
             </p>
           </div>
@@ -37,9 +37,9 @@
         <h2 class="doc-heading-2 fade-in-delayed">Processing AI Tool Calls</h2>
 
         <p class="doc-text fade-in-delayed">
-          One of the most powerful use cases for jsonreader is processing JSON
+          One of the most powerful use cases for @formkit/jsonreader is processing JSON
           responses from AI services. These responses can be large and take time
-          to generate, but with jsonreader, you can start processing the data as
+          to generate, but with @formkit/jsonreader, you can start processing the data as
           it arrives.
         </p>
 
@@ -65,7 +65,7 @@
             <pre
               class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
             >
-<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'@formkit/jsonreader'</span>;
 
 <span class="text-accent">async</span> <span class="text-accent">function</span> <span class="text-white">processAIFunctionCall</span>() {
   <span class="text-gray-400">// Call an AI model with function calling enabled</span>
@@ -158,7 +158,7 @@
             <pre
               class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
             >
-<span class="text-accent">import</span> { jsonPathReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+<span class="text-accent">import</span> { jsonPathReader } <span class="text-accent">from</span> <span class="text-white">'@formkit/jsonreader'</span>;
 
 <span class="text-accent">async</span> <span class="text-accent">function</span> <span class="text-white">progressiveProfileLoader</span>() {
   <span class="text-accent">const</span> response = <span class="text-accent">await</span> fetch(<span class="text-white">'/api/user/profile'</span>);
@@ -218,7 +218,7 @@
         <h2 class="doc-heading-2">Processing Large Files</h2>
 
         <p class="doc-text">
-          jsonreader is great for processing large JSON files without loading
+          @formkit/jsonreader is great for processing large JSON files without loading
           them entirely into memory:
         </p>
 
@@ -238,7 +238,7 @@
               class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
             >
 <span class="text-accent">import</span> { createReadStream } <span class="text-accent">from</span> <span class="text-white">'fs'</span>;
-<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'@formkit/jsonreader'</span>;
 
 <span class="text-accent">async</span> <span class="text-accent">function</span> <span class="text-white">processLargeJsonFile</span>(filePath) {
   <span class="text-gray-400">// Create a file stream</span>

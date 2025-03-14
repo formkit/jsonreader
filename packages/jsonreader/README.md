@@ -1,4 +1,4 @@
-# jsonreader
+# @formkit/jsonreader
 
 [![Tests](https://github.com/formkit/jsonreader/actions/workflows/tests.yml/badge.svg)](https://github.com/formkit/jsonreader/actions/workflows/tests.yml)
 
@@ -25,19 +25,19 @@ Each commercial project requires a separate license. See the [documentation](htt
 
 ```bash
 # npm
-npm install jsonreader
+npm install @formkit/jsonreader
 
 # yarn
-yarn add jsonreader
+yarn add @formkit/jsonreader
 
 # pnpm
-pnpm add jsonreader
+pnpm add @formkit/jsonreader
 ```
 
 ## Basic Usage
 
 ```typescript
-import { jsonReader } from 'jsonreader';
+import { jsonReader } from '@formkit/jsonreader';
 
 // Example with a fetch request
 const response = await fetch('https://api.example.com/large-data.json');
@@ -58,7 +58,7 @@ for await (const partialData of jsonReader(reader)) {
 ### Getting Specific Properties as Soon as They're Available
 
 ```typescript
-import { jsonPathReader } from 'jsonreader';
+import { jsonPathReader } from '@formkit/jsonreader';
 
 const response = await fetch('https://api.example.com/large-data.json');
 if (!response.body) throw new Error('No response body');
@@ -82,7 +82,7 @@ for await (const [value, path] of jsonPathReader(reader, paths)) {
 ### Controlling When Data is Yielded
 
 ```typescript
-import { jsonReader } from 'jsonreader';
+import { jsonReader } from '@formkit/jsonreader';
 
 const response = await fetch('https://api.example.com/large-data.json');
 if (!response.body) throw new Error('No response body');
@@ -154,7 +154,7 @@ Paths use dot notation to refer to nested properties:
 ## Example: Real-time UI Updates During File Upload
 
 ```typescript
-import { jsonPathReader } from 'jsonreader';
+import { jsonPathReader } from '@formkit/jsonreader';
 
 async function processFileUpload(fileUploadResponse) {
   const reader = fileUploadResponse.body.getReader();
@@ -186,7 +186,7 @@ async function processFileUpload(fileUploadResponse) {
 
 ## How It Works
 
-The `jsonreader` utility parses JSON data character by character as it arrives from a stream. It builds up a syntactically valid JSON structure as data comes in, closing any unclosed objects or arrays to create valid partial representations.
+The `@formkit/jsonreader` utility parses JSON data character by character as it arrives from a stream. It builds up a syntactically valid JSON structure as data comes in, closing any unclosed objects or arrays to create valid partial representations.
 
 For each chunk of data received:
 

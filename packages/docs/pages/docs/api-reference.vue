@@ -28,7 +28,7 @@
             <pre
               class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
             >
-<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'@formkit/jsonreader'</span>;
 
 <span class="text-accent">for</span> <span class="text-accent">await</span> (<span class="text-accent">const</span> partialData <span class="text-accent">of</span> jsonReader(reader)) {
   <span class="text-gray-400">// Process the partial data</span>
@@ -184,7 +184,7 @@
             <pre
               class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
             >
-<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'@formkit/jsonreader'</span>;
 
 <span class="text-accent">for</span> <span class="text-accent">await</span> (<span class="text-accent">const</span> partialData <span class="text-accent">of</span> jsonReader(reader, {
   <span class="text-gray-400">// Only yield when these properties are present</span>
@@ -231,7 +231,7 @@
             <pre
               class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
             >
-<span class="text-accent">import</span> { jsonPathReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+<span class="text-accent">import</span> { jsonPathReader } <span class="text-accent">from</span> <span class="text-white">'@formkit/jsonreader'</span>;
 
 <span class="text-accent">const</span> reader = response.body.getReader();
 <span class="text-accent">const</span> paths = [
@@ -404,7 +404,7 @@
             <pre
               class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
             >
-<span class="text-accent">import</span> { jsonPathReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+<span class="text-accent">import</span> { jsonPathReader } <span class="text-accent">from</span> <span class="text-white">'@formkit/jsonreader'</span>;
 
 <span class="text-accent">async</span> <span class="text-accent">function</span> <span class="text-white">searchWithRealtimeResults</span>() {
   <span class="text-accent">const</span> response = <span class="text-accent">await</span> fetch(<span class="text-white">'https://api.search-service.com/search?q=jsonreader'</span>);

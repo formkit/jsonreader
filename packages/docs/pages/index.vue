@@ -77,7 +77,7 @@
               <pre
                 class="text-white overflow-x-auto font-mono text-sm leading-relaxed"
               >
-<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'@formkit/jsonreader'</span>;
 
 <span class="text-gray-400">// Get a reader from a streaming response</span>
 <span class="text-accent">const</span> reader = response.body.getReader();
@@ -345,7 +345,7 @@
                 </h4>
               </div>
               <p class="text-gray-600 mb-8 flex-grow">
-                Use jsonreader in your personal projects, open source
+                Use @formkit/jsonreader in your personal projects, open source
                 contributions, and learning experiences at no cost.
               </p>
               <div class="flex items-end justify-between mt-auto">
@@ -446,13 +446,13 @@
               class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
             >
 <span class="text-gray-400"># Using npm</span>
-npm install jsonreader
+npm install @formkit/jsonreader
 
 <span class="text-gray-400"># Using yarn</span>
-yarn add jsonreader
+yarn add @formkit/jsonreader
 
 <span class="text-gray-400"># Using pnpm</span>
-pnpm add jsonreader</pre>
+pnpm add @formkit/jsonreader</pre>
           </div>
         </div>
 
@@ -468,7 +468,7 @@ pnpm add jsonreader</pre>
         <div class="navigation-card fade-in-delayed mb-16">
           <div class="card-content">
             <p class="text-black mb-6">
-              The <code class="inline-code">jsonreader</code> utility parses
+              The <code class="inline-code">@formkit/jsonreader</code> utility parses
               JSON data character by character as it arrives from a stream. It
               builds up a syntactically valid JSON structure as data comes in,
               closing any unclosed objects or arrays to create valid partial
@@ -541,7 +541,7 @@ pnpm add jsonreader</pre>
         </h3>
 
         <p class="doc-text mb-6">
-          The simplest way to use jsonreader is to process JSON data as it
+          The simplest way to use @formkit/jsonreader is to process JSON data as it
           streams in:
         </p>
 
@@ -558,7 +558,7 @@ pnpm add jsonreader</pre>
             <pre
               class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
             >
-<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'@formkit/jsonreader'</span>;
 
 <span class="text-accent">async</span> <span class="text-accent">function</span> <span class="text-white">processStreamingData</span>() {
   <span class="text-gray-400">// Get a stream from somewhere (e.g., fetch API)</span>
@@ -595,7 +595,7 @@ pnpm add jsonreader</pre>
           class="bg-gray-50 p-6 mb-8 rounded-lg border border-gray-200 card-noise"
         >
           <p class="text-black mb-6">
-            jsonreader provides three powerful configuration options to control
+            @formkit/jsonreader provides three powerful configuration options to control
             how streaming data is processed:
           </p>
 
@@ -651,7 +651,7 @@ pnpm add jsonreader</pre>
             <pre
               class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
             >
-<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+<span class="text-accent">import</span> { jsonReader } <span class="text-accent">from</span> <span class="text-white">'@formkit/jsonreader'</span>;
 
 <span class="text-accent">for</span> <span class="text-accent">await</span> (<span class="text-accent">const</span> data <span class="text-accent">of</span> jsonReader(reader, {
   <span class="text-gray-400">// Won't yield anything until 'metadata' is complete</span>
@@ -703,7 +703,7 @@ pnpm add jsonreader</pre>
             <pre
               class="text-white overflow-x-auto font-mono text-sm leading-relaxed text-left"
             >
-<span class="text-accent">import</span> { jsonPathReader } <span class="text-accent">from</span> <span class="text-white">'jsonreader'</span>;
+<span class="text-accent">import</span> { jsonPathReader } <span class="text-accent">from</span> <span class="text-white">'@formkit/jsonreader'</span>;
 
 <span class="text-accent">for</span> <span class="text-accent">await</span> (<span class="text-accent">const</span> [value, path] <span class="text-accent">of</span> jsonPathReader(reader, [
   <span class="text-white">'results'</span>,

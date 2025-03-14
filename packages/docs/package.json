@@ -24,6 +24,6 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "jsonreader": "workspace:*"
+    "@formkit/jsonreader": "workspace:*"
   }
 }
