@@ -46,7 +46,7 @@ export default {
         },
         {
           property: "og:image",
-          content: "https://jsonreader.com/og-image.png",
+          content: "https://jsonreader.com/og.png",
         },
 
         // Twitter Card tags
@@ -63,7 +63,7 @@ export default {
         },
         {
           name: "twitter:image",
-          content: "https://jsonreader.com/og-image.png",
+          content: "https://jsonreader.com/og.png",
         },
       ],
       link: [
