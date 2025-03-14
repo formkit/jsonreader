@@ -1,6 +1,6 @@
 {
   "name": "@formkit/jsonreader",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A utility for reading and parsing JSON streams in real-time",
   "type": "module",
   "main": "dist/index.js",
