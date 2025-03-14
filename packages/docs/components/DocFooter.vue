@@ -7,7 +7,7 @@
           <ul class="space-y-3">
             <li>
               <a
-                href="/docs/getting-started"
+                href="/#get-started"
                 class="text-gray-600 hover:text-accent-1 transition-colors"
                 >Getting Started</a
               >
@@ -60,8 +60,9 @@
         <div class="fade-in">
           <h3 class="text-xl font-bold text-black mb-6">About</h3>
           <p class="text-gray-600 mb-6">
-            @formkit/jsonreader is a utility for processing JSON data from streams in
-            real-time, optimized for AI tool calls and large API responses.
+            @formkit/jsonreader is a utility for processing JSON data from
+            streams in real-time, optimized for AI tool calls and large API
+            responses.
           </p>
           <div class="flex items-center space-x-4">
             <a
