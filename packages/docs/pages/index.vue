@@ -436,13 +436,13 @@ for await (const data of jsonReader(reader)) {
         <CodeBlock
           language="bash"
           code="# Using npm
-npm install jsonreader
+npm install @formkit/jsonreader
 
 # Using yarn
-yarn add jsonreader
+yarn add @formkit/jsonreader
 
 # Using pnpm
-pnpm add jsonreader"
+pnpm add @formkit/jsonreader"
           class="card-noise fade-in-delayed mb-16"
           style="animation-delay: 0.2s"
         />
