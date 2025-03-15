@@ -12,11 +12,6 @@
         </a>
         <nav class="flex items-center space-x-6">
           <a
-            href="/docs/getting-started"
-            class="text-gray-600 hover:text-accent transition-colors text-sm"
-            >Docs</a
-          >
-          <a
             href="https://github.com/formkit/jsonreader"
             target="_blank"
             rel="noopener noreferrer"
