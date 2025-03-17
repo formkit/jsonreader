@@ -3,25 +3,28 @@
     <!-- Hero Section with enhanced design -->
     <section class="relative py-20 overflow-hidden">
       <!-- Background falling blocks animation -->
-      <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div class="falling-blocks-container">
-          <div
-            v-for="i in 20"
-            :key="i"
-            class="falling-block"
-            :style="generateBlockStyle()"
-          ></div>
-          <!-- JSON symbol blocks -->
-          <div
-            v-for="i in 10"
-            :key="`json-${i}`"
-            class="falling-json-symbol"
-            :style="generateJsonSymbolStyle()"
-          >
-            {{ getRandomJsonSymbol() }}
+      <ClientOnly>
+        <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <div class="falling-blocks-container">
+            <div
+              v-for="i in blockCount"
+              :key="i"
+              class="falling-block"
+              :style="generateBlockStyle(i)"
+            ></div>
+            <!-- JSON symbol blocks -->
+            <div
+              v-for="i in jsonSymbolCount"
+              :key="`json-${i}`"
+              class="falling-json-symbol"
+              :style="generateJsonSymbolStyle(i)"
+            >
+              {{ getRandomJsonSymbol() }}
+            </div>
           </div>
         </div>
-      </div>
+      </ClientOnly>
+
       <div class="container mx-auto px-4 relative z-10">
         <div class="max-w-4xl mx-auto text-center mb-12">
           <!-- Title with enhanced animation -->
@@ -36,15 +39,14 @@
           </div>
 
           <p
-            class="text-xl md:text-2xl mb-8 text-black leading-relaxed fade-in-delayed"
+            class="text-xl text-balance md:text-2xl mb-8 text-black leading-loose fade-in-delayed"
           >
             Stream and process
-            <span class="accent-text">JSON responses</span> from
-            <span class="accent-text">AI tool calls</span> as they arrive—<br
-              class="hidden md:block"
-            />
-            intelligently tracking state to produce JSON
-            <span class="accent-text">before it's complete</span>
+            <span class="accent-text inline-block">JSON responses</span> from
+            <span class="accent-text inline-block">AI tool calls</span> as they
+            arrive—<br class="hidden md:block" />
+            intelligently tracking state to produce valid JSON
+            <span class="accent-text inline-block">before it's complete</span>
           </p>
 
           <div
@@ -285,8 +287,8 @@ for await (const data of jsonReader(reader)) {
               Lightweight & Fast
             </h3>
             <p class="text-black">
-              Super lightweight (1.6Kb min-gzip) and minimal overhead, ensuring maximum
-              performance even with large streaming datasets.
+              Super lightweight (1.6Kb min-gzip) and minimal overhead, ensuring
+              maximum performance even with large streaming datasets.
             </p>
           </div>
         </div>
@@ -346,8 +348,9 @@ for await (const data of jsonReader(reader)) {
                 </h4>
               </div>
               <p class="text-gray-600 mb-8 flex-grow">
-                Use jsonreader in your personal projects, open source
-                contributions, and learning experiences at no cost.
+                Use jsonreader in your personal projects, educational pursuits,
+                and non-commercial applications, but not as part of
+                redistributed open source that enables commercial use.
               </p>
               <div class="flex items-end justify-between mt-auto">
                 <span class="text-4xl font-bold text-black">$0</span>
@@ -433,13 +436,13 @@ for await (const data of jsonReader(reader)) {
         <CodeBlock
           language="bash"
           code="# Using npm
-npm install jsonreader
+npm install @formkit/jsonreader
 
 # Using yarn
-yarn add jsonreader
+yarn add @formkit/jsonreader
 
 # Using pnpm
-pnpm add jsonreader"
+pnpm add @formkit/jsonreader"
           class="card-noise fade-in-delayed mb-16"
           style="animation-delay: 0.2s"
         />
@@ -692,41 +695,107 @@ for await (const [value, path] of jsonPathReader(reader, [
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue"
 import Logo from "../components/Logo.vue"
 import CodeBlock from "../components/CodeBlock.vue"
+import { ref, computed, onMounted, onBeforeUnmount } from "vue"
+
+// Reactive state for screen width
+const windowWidth = ref(
+  typeof window !== "undefined" ? window.innerWidth : 1024
+)
+
+// Compute the number of elements based on screen width
+const blockCount = computed(() => {
+  const maxBlocks = 60
+  const minBlocks = 30
+
+  if (windowWidth.value >= 1024) {
+    return maxBlocks
+  } else if (windowWidth.value <= 320) {
+    return minBlocks
+  } else {
+    // Linear interpolation between min and max based on screen width
+    const ratio = (windowWidth.value - 320) / (1024 - 320)
+    return Math.round(minBlocks + ratio * (maxBlocks - minBlocks))
+  }
+})
+
+const jsonSymbolCount = computed(() => {
+  const maxSymbols = 15
+  const minSymbols = 8
+
+  if (windowWidth.value >= 1024) {
+    return maxSymbols
+  } else if (windowWidth.value <= 320) {
+    return minSymbols
+  } else {
+    // Linear interpolation between min and max based on screen width
+    const ratio = (windowWidth.value - 320) / (1024 - 320)
+    return Math.round(minSymbols + ratio * (maxSymbols - minSymbols))
+  }
+})
+
+// Window resize handler
+const handleResize = () => {
+  windowWidth.value = window.innerWidth
+}
+
+// Set up and clean up the resize listener
+onMounted(() => {
+  window.addEventListener("resize", handleResize)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", handleResize)
+})
 
 // Function to get a random JSON symbol
 const getRandomJsonSymbol = () => {
-  const symbols = ["{", "}", "[", "]", ":", ",", '"', "."]
+  const symbols = ["{", "}", "[", "]", ":"]
   return symbols[Math.floor(Math.random() * symbols.length)]
 }
 
 // Function to generate styles for JSON symbol blocks
-const generateJsonSymbolStyle = () => {
+const generateJsonSymbolStyle = (index) => {
   const left = Math.floor(Math.random() * 100) // Position across the screen
-  const delay = Math.random() * 5 // Random delay
-  const duration = Math.random() * 15 + 15 // Animation duration between 15-30s
+
+  // Calculate evenly distributed delays based on index
+  // This creates a consistent stream of elements
+  const maxDelay = 30 // Maximum delay in seconds
+  const totalItems = jsonSymbolCount.value
+  const delay = ((index / totalItems) * maxDelay) % maxDelay // Distribute delays evenly
+
+  // Varied durations between 15-25s
+  const duration = Math.random() * 10 + 15
+
   const size = Math.floor(Math.random() * 20) + 20 // Size between 20px and 40px
-  const opacity = Math.random() * 0.1 + 0.05 // Low opacity between 0.05-0.15
+  const originalOpacity = Math.random() * 0.1 + 0.05 // Low opacity between 0.05-0.15
 
   return {
     left: `${left}%`,
     animationDelay: `${delay}s`,
     animationDuration: `${duration}s`,
-    opacity: opacity,
+    "--original-opacity": originalOpacity, // Set as CSS variable
     fontSize: `${size}px`,
     transform: `rotate(${Math.floor(Math.random() * 20 - 10)}deg)`, // Slight rotation
   }
 }
 
 // Function to generate random styles for falling blocks
-const generateBlockStyle = () => {
+const generateBlockStyle = (index) => {
   const size = Math.floor(Math.random() * 40) + 10 // Size between 10px and 50px
   const left = Math.floor(Math.random() * 100) // Position across the screen
-  const delay = Math.random() * 5 // Random delay
-  const duration = Math.random() * 10 + 10 // Animation duration between 10-20s
-  const opacity = Math.random() * 0.08 + 0.02 // Low opacity between 0.02-0.1
+
+  // Calculate evenly distributed delays based on index
+  // This creates a consistent stream of elements
+  const maxDelay = 40 // Maximum delay in seconds
+  const totalItems = blockCount.value
+  const delay = ((index / totalItems) * maxDelay) % maxDelay // Distribute delays evenly
+
+  // Varied durations between 10-20s
+  const duration = Math.random() * 10 + 10
+
+  const originalOpacity = Math.random() * 0.08 + 0.02 // Low opacity between 0.02-0.1
 
   // Choose random shape type
   const shapeTypes = ["square", "rectangle", "circle", "diamond"]
@@ -739,7 +808,7 @@ const generateBlockStyle = () => {
     left: `${left}%`,
     animationDelay: `${delay}s`,
     animationDuration: `${duration}s`,
-    opacity: opacity,
+    "--original-opacity": originalOpacity, // Set as CSS variable
     transform: `rotate(${Math.floor(Math.random() * 360)}deg)`,
   }
 
@@ -758,42 +827,6 @@ const generateBlockStyle = () => {
 
   return styles
 }
-
-// Create a grid pattern background effect for code blocks
-const createBackgroundGridPattern = () => {
-  if (process.client) {
-    setTimeout(() => {
-      const codeWindows = document.querySelectorAll(".code-window-content")
-      codeWindows.forEach((codeWindow) => {
-        if (!codeWindow.querySelector(".bg-grid-pattern")) {
-          const gridPattern = document.createElement("div")
-          gridPattern.classList.add("bg-grid-pattern")
-          gridPattern.style.position = "absolute"
-          gridPattern.style.inset = "0"
-          gridPattern.style.opacity = "0.05"
-          gridPattern.style.pointerEvents = "none"
-          gridPattern.style.backgroundSize = "20px 20px"
-          gridPattern.style.backgroundImage =
-            "linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px)"
-          codeWindow.appendChild(gridPattern)
-        }
-      })
-    }, 100)
-  }
-}
-
-// Create a scroll to top function
-const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  })
-}
-
-// Initialize any client-side effects
-onMounted(() => {
-  createBackgroundGridPattern()
-})
 </script>
 
 <style scoped>
@@ -971,6 +1004,7 @@ onMounted(() => {
   border-radius: 4px;
   animation: fall linear infinite;
   z-index: 0;
+  will-change: transform;
 }
 
 .falling-json-symbol {
@@ -982,14 +1016,25 @@ onMounted(() => {
   animation: fall linear infinite;
   z-index: 0;
   text-shadow: 0 0 5px rgba(59, 130, 246, 0.15);
+  will-change: transform;
 }
 
 @keyframes fall {
   0% {
-    transform: translateY(-100px) rotate(0deg);
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 0;
+  }
+  2% {
+    /* Quick fade in to the pre-set randomized opacity */
+    opacity: var(--original-opacity, 0.05);
+  }
+  98% {
+    /* Maintain the pre-set randomized opacity until near the end */
+    opacity: var(--original-opacity, 0.05);
   }
   100% {
-    transform: translateY(100vh) rotate(360deg);
+    transform: translateY(calc(100vh + 40px)) rotate(360deg);
+    opacity: 0;
   }
 }
 </style>

@@ -30,18 +30,14 @@
             v-if="showLineNumbers"
             class="line-numbers select-none pr-4 opacity-50 text-right"
           >
-            <div
-              v-for="n in lineCount"
-              :key="n"
-              class="text-gray-500 leading-relaxed"
-            >
+            <div v-for="n in lineCount" :key="n" class="line-number">
               {{ n }}
             </div>
           </div>
 
           <!-- Code content -->
           <pre
-            class="flex-1 relative z-10 m-0 p-0 bg-transparent overflow-x-auto whitespace-pre"
+            class="flex-1 relative z-10 m-0 p-0 bg-transparent overflow-x-auto whitespace-pre code-content"
           ><code :class="`language-${prismLanguage}`" v-html="highlightedCode"></code></pre>
         </div>
         <template #fallback>
@@ -52,18 +48,14 @@
               v-if="showLineNumbers"
               class="line-numbers select-none pr-4 opacity-50 text-right"
             >
-              <div
-                v-for="n in lineCount"
-                :key="n"
-                class="text-gray-500 leading-relaxed"
-              >
+              <div v-for="n in lineCount" :key="n" class="line-number">
                 {{ n }}
               </div>
             </div>
 
             <!-- Code content -->
             <pre
-              class="flex-1 relative z-10 m-0 p-0 bg-transparent overflow-x-auto whitespace-pre"
+              class="flex-1 relative z-10 m-0 p-0 bg-transparent overflow-x-auto whitespace-pre code-content"
             ><code>{{ code }}</code></pre>
           </div>
         </template>
@@ -82,7 +74,7 @@ const props = defineProps({
   },
   showLineNumbers: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   code: {
     type: String,
@@ -203,8 +195,27 @@ const copyCode = () => {
 .line-numbers {
   min-width: 2rem;
   font-size: 0.9rem;
-  line-height: 1.5;
   font-family: "JetBrains Mono", monospace;
+  display: flex;
+  flex-direction: column;
+}
+
+.line-number {
+  height: 1.5rem; /* Match the line-height of the code */
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.code-content {
+  line-height: 1.5;
+}
+
+/* Ensure consistent line height between code and line numbers */
+:deep(.token) {
+  display: inline-block;
+  line-height: inherit;
 }
 
 /* Override Prism.js token colors to match Monokai theme */

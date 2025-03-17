@@ -19,7 +19,7 @@ This is a monorepo for the `@formkit/jsonreader` package and its documentation s
 - **Personal Use**: 100% free for personal projects, open source contributions, and learning.
 - **Commercial Use**: $10 per project for commercial applications. [Purchase a license](https://buy.stripe.com/14k7uU7jqc7x4jmdQS).
 
-Each commercial project requires a separate license. See the [documentation](https://jsonreader.dev) for more details.
+Each commercial project requires a separate license. See the [documentation](https://jsonreader.formkit.com/) for more details.
 
 ## Repository Structure
 

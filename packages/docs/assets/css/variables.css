@@ -14,15 +14,3 @@
   /* Border colors */
   --color-border: #e5e7eb; /* gray-200 */
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-text-primary: #f3f4f6; /* gray-100 */
-    --color-text-secondary: #d1d5db; /* gray-300 */
-
-    --color-bg-card: #1f2937; /* gray-800 */
-    --color-bg-card-secondary: #111827; /* gray-900 */
-
-    --color-border: #374151; /* gray-700 */
-  }
-}
